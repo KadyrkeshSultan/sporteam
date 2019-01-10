@@ -3,11 +3,11 @@ import './App.css';
 import {connect} from 'react-redux'
 import {User} from '../components/User'
 import {Page} from '../components/Page'
+import {setYear} from '../actions/PageActions'
 
 class App extends Component {
   render() {
-      const {user} = this.props;
-      const {page} = this.props;
+      const {user, setYearAction, page} = this.props;
     return (
       <div className="App">
         <header className="App-header">
@@ -15,7 +15,7 @@ class App extends Component {
         </header>
         <p className={"App-intro"}>
             <User name={user.name}/>
-            <Page photos={page.photos} year={page.year}/>
+            <Page photos={page.photos} year={page.year} setYear={setYearAction}/>
         </p>
       </div>
     );
@@ -29,4 +29,10 @@ const mapStateToProps = store => {
     }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch =>{
+    return{
+        setYearAction : year => dispatch(setYear(year))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
