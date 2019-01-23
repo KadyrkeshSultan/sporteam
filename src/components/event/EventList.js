@@ -86,12 +86,10 @@ function EventList(props) {
               Найдите подходящее вам событие или создайте событие
             </Typography>
             <div className={classes.heroButtons}>
-              <Grid container spacing={16} justify="center">
-                <Grid item>
+              <Grid container  justify="center">
                   <Button variant="contained" color="primary">
                     Создать событие
                   </Button>
-                </Grid>
               </Grid>
             </div>
           </div>
