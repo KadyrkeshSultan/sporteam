@@ -4,12 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {connect } from 'react-redux';
 import {compose} from 'redux'
-import {signOut} from '../../store/actions/authActions'
+import SignedInLinks from './SignedInLinks'
+import SignedOutLinks from './SignedOutLinks'
 
 const styles = {
   root: {
@@ -26,7 +26,7 @@ const styles = {
 
 function ButtonAppBar(props) {
   const { classes, auth } = props;
-  const authLinks = !auth.uid ? <Button href='/login' color="inherit">Войти</Button> : <Button onClick={props.signOut} color='inherit'>Выйти</Button>;
+  const authLinks = !auth.uid ? <SignedOutLinks /> : <SignedInLinks />
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -56,13 +56,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return{
-        signOut: () => dispatch(signOut())
-    }
-}
-
 export default compose(
     withStyles(styles),
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps),
 )(ButtonAppBar);
