@@ -1,20 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
-import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
@@ -53,7 +45,7 @@ const styles = theme => ({
 function EventCard(props) {
     const { classes, event, categorySports } = props;
     const loaderPic = "https://thumbs.gfycat.com/ArcticWarmBettong-max-1mb.gif";
-    const categorySport = categorySports && categorySports.find((item) => {return item.id == event.categorySport.id})
+    const categorySport = categorySports && categorySports.find((item) => {return item.id === event.categorySport.id})
   return (
     <Card className={classes.card}>
       <CardHeader
