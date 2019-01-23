@@ -20,6 +20,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
+const cards = [1,2,4, 5]
 const theme1 = createMuiTheme({ typography: { useNextVariants: true } });
 
 const styles = theme => ({
@@ -70,11 +71,8 @@ const styles = theme => ({
   },
 });
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
 function EventList(props) {
   const { classes, events } = props;
-    console.log(events)
   return (
     <React.Fragment>
       <main>
@@ -84,7 +82,7 @@ function EventList(props) {
             <Typography component="h1" variant="h4" align="center" color="textPrimary" gutterBottom>
               Все события
             </Typography>
-            <Typography variant="h7" align="center" color="textSecondary" paragraph>
+            <Typography variant="h6" align="center" color="textSecondary" paragraph>
               Найдите подходящее вам событие или создайте событие
             </Typography>
             <div className={classes.heroButtons}>
@@ -100,12 +98,10 @@ function EventList(props) {
         </div>
         <div className={classNames(classes.layout, classes.cardGrid)}>
           {/* End hero unit */}
-          <Grid container spacing={40}>
+          <Grid container direction="row" justify="center" alignItems="center" spacing={40}>
             {events && events.map(event => (
-              <Grid item key={event.id} sm={6} md={4} lg={4}>
-                <ThemeProvider theme={theme1}>
-                    <EventCard event={event}/>
-                </ThemeProvider>
+              <Grid item key={event.id} sm={6} md={4} lg={3} style={{width: '100%'}} >
+                    <EventCard event={event} />
               </Grid>
             ))}
           </Grid>
@@ -130,19 +126,14 @@ EventList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
-        events: state.firestore.ordered.events
+        events: state.firestore.ordered.events,
     }
 }
 export default compose(
     withStyles(styles),
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'events'}
+        { collection: 'events'},
     ])
 )(EventList)
-// export default withStyles(styles)(connect(mapStateToProps), firebaseConnect([
-//     {collection: 'events'}
-// ]) (EventList));
-//export default withStyles(styles)(EventList);

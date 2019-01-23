@@ -16,6 +16,13 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import moment from 'moment';
+import 'moment/locale/ru';
+import { compose} from 'redux'
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+
 
 const styles = theme => ({
   card: {
@@ -44,8 +51,9 @@ const styles = theme => ({
 });
 
 function EventCard(props) {
-    const { classes, event } = props;
-    console.log(event);
+    const { classes, event, categorySports } = props;
+    const loaderPic = "https://thumbs.gfycat.com/ArcticWarmBettong-max-1mb.gif";
+    const categorySport = categorySports && categorySports.find((item) => {return item.id == event.categorySport.id})
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -54,18 +62,13 @@ function EventCard(props) {
             R
           </Avatar>
         }
-        action={
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={event.name}
-        subheader={event.date}
+        subheader={moment(event.date.toDate()).locale('ru').format('llll')}
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
+        image={categorySport == null ? loaderPic : categorySport.pictureUrl}
+        title={categorySport == null ? "" : categorySport.name}
       />
       <CardContent>
         <Typography component="p">
@@ -73,15 +76,23 @@ function EventCard(props) {
         </Typography>
       </CardContent>
       <CardActions className={classes.actions} disableActionSpacing>
-        <IconButton aria-label="Add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="Share">
-          <ShareIcon />
-        </IconButton>
+        <Button size="small" color="primary">
+          Подробнее
+        </Button>
       </CardActions>
     </Card>
   );
 }
 
-export default withStyles(styles)(EventCard);
+const mapStateToProps = (state) => {
+    return {
+        categorySports: state.firestore.ordered.categorySports
+    }
+}
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'categorySports'}
+    ])
+)(EventCard)
