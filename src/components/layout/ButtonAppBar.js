@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import {connect } from 'react-redux';
+import {compose} from 'redux'
+import {signOut} from '../../store/actions/authActions'
 
 const styles = {
   root: {
@@ -22,7 +25,8 @@ const styles = {
 };
 
 function ButtonAppBar(props) {
-  const { classes } = props;
+  const { classes, auth } = props;
+  const authLinks = !auth.uid ? <Button href='/login' color="inherit">Войти</Button> : <Button onClick={props.signOut} color='inherit'>Выйти</Button>;
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -33,7 +37,9 @@ function ButtonAppBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             SportApp
           </Typography>
-          <Button href='/login' color="inherit">Login</Button>
+          {
+              authLinks
+          }
         </Toolbar>
       </AppBar>
     </div>
@@ -44,4 +50,19 @@ ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+const mapStateToProps = (state) => {
+    return{
+        auth: state.firebase.auth
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        signOut: () => dispatch(signOut())
+    }
+}
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, mapDispatchToProps),
+)(ButtonAppBar);

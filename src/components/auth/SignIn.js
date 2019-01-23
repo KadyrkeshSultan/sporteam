@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux'
 import { signIn } from '../../store/actions/authActions'
+import { compose } from 'redux'
 
 const styles = theme => ({
   main: {
@@ -61,7 +62,7 @@ class SignIn extends Component {
     }
 
     render(){
-        const {classes} = this.props;
+        const {classes, authError} = this.props;
         return (
         <main className={classes.main}>
             <CssBaseline />
@@ -81,6 +82,11 @@ class SignIn extends Component {
                 <InputLabel htmlFor="password">Пароль</InputLabel>
                 <Input name="password" onChange={this.handleChange} type="password" id="password" autoComplete="current-password" />
                 </FormControl>
+                <FormControl margin="normal" fullWidth>
+                { 
+                    authError ?  <Typography color='error' align='center'>{authError}</Typography> : null
+                }
+                </FormControl>
                 <Button
                 type="submit"
                 fullWidth
@@ -91,6 +97,7 @@ class SignIn extends Component {
                 >
                 Войти
                 </Button>
+                
             </form>
             </Paper>
         </main>
@@ -115,4 +122,7 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(SignIn));
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, mapDispatchToProps)
+)(SignIn);
