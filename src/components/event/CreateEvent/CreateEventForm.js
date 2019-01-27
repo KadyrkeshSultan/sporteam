@@ -12,7 +12,7 @@ import EventNameForm from './EventNameForm';
 import SportList from './SportList'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
-import {clickNextBtn, clickBackBtn, chooseSport, eventNameChange} from '../../../store/actions/eventActions'
+import {clickNextBtn, clickBackBtn, chooseSport, eventNameChange, chooseDate} from '../../../store/actions/eventActions'
 import { firestoreConnect } from 'react-redux-firebase';
 
 const styles = theme => ({
@@ -52,10 +52,10 @@ const styles = theme => ({
   },
 });
 
-const steps = ['Что организуем?', 'Название', 'Когда?'];
+const steps = ['', '', ''];
 
 function getStepContent(step, props) {
-    const {chooseSport, categorySports, categorySportId, eventNameChange, eventName} = props;
+    const {chooseSport, categorySports, categorySportId, eventNameChange, eventName, datetime, chooseDate} = props;
   switch (step) {
     case 0:
       return <SportList categorySports={categorySports} chooseSport={chooseSport}/>;
@@ -67,7 +67,7 @@ function getStepContent(step, props) {
       eventName={eventName}
        />;
     case 2:
-      return <EventTimeForm />;
+      return <EventTimeForm datetime={datetime} chooseDate={chooseDate} />;
     default:
       throw new Error('Unknown step');
   }
@@ -147,7 +147,8 @@ const mapStateToProps = (state) => {
         activeStep: state.event.activeStep,
         categorySports: state.firestore.ordered.categorySports,
         categorySportId: state.event.categorySportId,
-        eventName: state.event.eventName
+        eventName: state.event.eventName,
+        datetime: state.event.datetime,
     }
 }
 
@@ -156,7 +157,8 @@ const mapDispatchToProps = (dispatch) =>{
         clickNextBtn: () => dispatch(clickNextBtn()),
         clickBackBtn: () => dispatch(clickBackBtn()),
         chooseSport: (categorySportId) => dispatch(chooseSport(categorySportId)),
-        eventNameChange: (eventName) => dispatch(eventNameChange(eventName))
+        eventNameChange: (eventName) => dispatch(eventNameChange(eventName)),
+        chooseDate: (datetime) => dispatch(chooseDate(datetime))
     }
 }
 

@@ -14,18 +14,14 @@ const styles = {
 };
 
 class DatePickers extends React.Component {
-  state = {
-    // The first commit of Material-UI
-    selectedDate: new Date(),
-  };
-
   handleDateChange = date => {
-    this.setState({ selectedDate: date });
+      this.props.chooseDate(date);
+    
   };
 
   render() {
     const { classes } = this.props;
-    const { selectedDate } = this.state;
+    const { selectedDate } = this.props;
 
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>

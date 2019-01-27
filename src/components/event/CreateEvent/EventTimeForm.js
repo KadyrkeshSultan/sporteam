@@ -11,7 +11,7 @@ class EventTimeForm extends React.Component {
                 Когда?
             </Typography>
             <Grid style={{margin: 'auto'}}>
-                <DatePickers align='center' />
+                <DatePickers align='center' selectedDate={this.props.datetime} chooseDate={this.props.chooseDate} />
             </Grid>
             </React.Fragment>
         );

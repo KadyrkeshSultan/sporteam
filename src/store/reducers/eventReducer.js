@@ -4,12 +4,14 @@ export const CHOOSE_SPORT = 'CHOOSE_SPORT';
 export const CLICK_NEXT_BTN = 'CLICK_NEXT_BTN';
 export const CLICK_BACK_BTN = 'CLICK_BACK_BTN';
 export const EVENT_NAME_CHANGE = 'EVENT_NAME_CHANGE';
+export const CHOOSE_DATE = 'CHOOSE_DATE';
 
 const initState = {
     events : [],
     categorySportId: '1',
     activeStep: 0,
-    eventName: ''
+    eventName: '',
+    datetime: new Date()
 }
 
 const eventReducer = (state = initState, action) => {
@@ -35,6 +37,11 @@ const eventReducer = (state = initState, action) => {
                 ...state,
                 activeStep: state.activeStep - 1
             };
+        case CHOOSE_DATE:
+            return{
+                ...state,
+                datetime: action.payload
+            }
         case CREATE_EVENT:
             console.log(CREATE_EVENT, action.event);
             return state;

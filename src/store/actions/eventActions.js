@@ -1,4 +1,9 @@
-import { CHOOSE_SPORT, CLICK_NEXT_BTN, CLICK_BACK_BTN, EVENT_NAME_CHANGE } from '../reducers/eventReducer'
+import { CHOOSE_SPORT, 
+    CLICK_NEXT_BTN, 
+    CLICK_BACK_BTN, 
+    EVENT_NAME_CHANGE,
+    CHOOSE_DATE
+ } from '../reducers/eventReducer'
 
 export const chooseSport = (categorySportId) => {
     return (dispatch, getState, {getFirebase, getFirestore}) =>{
@@ -19,6 +24,12 @@ export const chooseSport = (categorySportId) => {
         //     })
         // dispatch({type: CHOOSE_SPORT, categorySport});
         dispatch({type: CHOOSE_SPORT, payload: categorySportId});
+    }
+}
+
+export const chooseDate = (datetime) =>{
+    return (dispatch) => {
+        dispatch({type: CHOOSE_DATE, payload: datetime});
     }
 }
 
