@@ -3,7 +3,8 @@ import { CHOOSE_SPORT,
     CLICK_BACK_BTN, 
     EVENT_NAME_CHANGE,
     CHOOSE_DATE,
-    CHOOSE_ADDRESS
+    CHOOSE_ADDRESS,
+    EVENT_DESC_CHANGE
  } from '../reducers/eventReducer'
 
 export const chooseSport = (categorySportId) => {
@@ -44,6 +45,12 @@ export const eventNameChange = (eventName) =>{
     console.log('eventNameChg -->', eventName);
     return (dispatch) => {
         dispatch({type: EVENT_NAME_CHANGE, payload: eventName});
+    }
+}
+
+export const eventDescChange = (eventDesc) =>{
+    return (dispatch) => {
+        dispatch({type: EVENT_DESC_CHANGE, payload: eventDesc});
     }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import Snackbar from '@material-ui/core/Snackbar'
 import MUIPlacesAutocomplete, { geocodeBySuggestion } from 'mui-places-autocomplete'
+import Typography from '@material-ui/core/Typography';
 
 class Geo extends React.Component {
   constructor(props) {
@@ -75,6 +76,9 @@ class Geo extends React.Component {
     //const {location} = this.props;
     return (
       <div style={{ position: 'relative' }}>
+            <Typography variant="h6" align='center' gutterBottom>
+                Введите адрес
+            </Typography>
         <MUIPlacesAutocomplete
           onSuggestionSelected={this.onSuggestionSelected}
           //textFieldProps={{value: location.address}}

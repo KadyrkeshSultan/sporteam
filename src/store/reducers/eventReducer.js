@@ -6,6 +6,7 @@ export const CLICK_BACK_BTN = 'CLICK_BACK_BTN';
 export const EVENT_NAME_CHANGE = 'EVENT_NAME_CHANGE';
 export const CHOOSE_DATE = 'CHOOSE_DATE';
 export const CHOOSE_ADDRESS = 'CHOOSE_ADDRESS';
+export const EVENT_DESC_CHANGE = 'EVENT_DESC_CHANGE';
 
 const initState = {
     events : [],
@@ -13,6 +14,7 @@ const initState = {
     activeStep: 0,
     eventName: '',
     datetime: new Date(),
+    eventDesc: '',
     location: {
         name: '',
         address: '',
@@ -39,6 +41,11 @@ const eventReducer = (state = initState, action) => {
                 ...state,
                 eventName: action.payload
             }
+        case EVENT_DESC_CHANGE:
+            return{
+                ...state,
+                eventDesc: action.payload
+            };
         case CLICK_NEXT_BTN:
             return{
                 ...state,

@@ -13,8 +13,17 @@ import Geo from './Geo';
 import SportList from './SportList'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
-import {clickNextBtn, clickBackBtn, chooseSport, eventNameChange, chooseDate, chooseAddress} from '../../../store/actions/eventActions'
+import {
+    clickNextBtn, 
+    clickBackBtn, 
+    chooseSport, 
+    eventNameChange, 
+    chooseDate, 
+    chooseAddress, 
+    eventDescChange
+} from '../../../store/actions/eventActions'
 import { firestoreConnect } from 'react-redux-firebase';
+import EventSummary from './EventSummary';
 
 const styles = theme => ({
   appBar: {
@@ -64,8 +73,20 @@ function getStepContent(step, props) {
         eventName, 
         datetime,
         chooseAddress,
-        location, 
+        location,
+        eventDesc,
+        eventDescChange, 
         chooseDate} = props;
+    
+    var event = {
+        name: eventName,
+        desc: eventDesc,
+        datetime: datetime,
+        categorySportId: categorySportId,
+        location:{
+            address: location.address
+        }
+    };
   switch (step) {
     case 0:
       return <SportList categorySports={categorySports} chooseSport={chooseSport}/>;
@@ -80,6 +101,8 @@ function getStepContent(step, props) {
       return <EventTimeForm datetime={datetime} chooseDate={chooseDate} />;
     case 3:
         return <Geo location={location} chooseAddress={chooseAddress} />;
+    case 4:
+        return <EventSummary event={event} categorySports={categorySports} eventDescChange={eventDescChange} />
     default:
       throw new Error('Unknown step');
   }
@@ -136,7 +159,7 @@ class CreateEventForm extends React.Component {
                       onClick={this.props.clickNextBtn}
                       className={classes.button}
                     >
-                      {activeStep === steps.length - 1 ? 'Place order' : 'Вперед'}
+                      {activeStep === steps.length - 1 ? 'Создать' : 'Вперед'}
                     </Button>
                   </div>
                 </React.Fragment>
@@ -161,7 +184,8 @@ const mapStateToProps = (state) => {
         categorySportId: state.event.categorySportId,
         eventName: state.event.eventName,
         datetime: state.event.datetime,
-        location: state.event.location
+        location: state.event.location,
+        eventDesc: state.event.eventDesc
     }
 }
 
@@ -172,7 +196,8 @@ const mapDispatchToProps = (dispatch) =>{
         chooseSport: (categorySportId) => dispatch(chooseSport(categorySportId)),
         eventNameChange: (eventName) => dispatch(eventNameChange(eventName)),
         chooseDate: (datetime) => dispatch(chooseDate(datetime)),
-        chooseAddress: (location) => dispatch(chooseAddress(location))
+        chooseAddress: (location) => dispatch(chooseAddress(location)),
+        eventDescChange: (eventDesc) => dispatch(eventDescChange(eventDesc))
     }
 }
 
