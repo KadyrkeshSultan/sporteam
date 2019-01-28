@@ -27,6 +27,7 @@ class Geo extends React.Component {
     // Once a suggestion has been selected by your consumer you can use the utility geocoding
     // functions to get the latitude and longitude for the selected suggestion.
     geocodeBySuggestion(suggestion).then((results) => {
+        console.log(suggestion);
       if (results.length < 1) {
         this.setState({
           open: true,
@@ -47,7 +48,8 @@ class Geo extends React.Component {
           name: suggestion.description,
           address: suggestion.description,
           latitude: coordinates.lat,
-          longitude: coordinates.lng
+          longitude: coordinates.lng,
+          city: suggestion.terms[suggestion.terms.length - 2].value
       }
       this.props.chooseAddress(location);
       // Add your business logic here. In this case we simply set our state to show our <Snackbar>.

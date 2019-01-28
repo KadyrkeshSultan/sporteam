@@ -4,7 +4,9 @@ import { CHOOSE_SPORT,
     EVENT_NAME_CHANGE,
     CHOOSE_DATE,
     CHOOSE_ADDRESS,
-    EVENT_DESC_CHANGE
+    EVENT_DESC_CHANGE,
+    CREATE_EVENT_SUCCESS,
+    CREATE_EVENT_ERROR
  } from '../reducers/eventReducer'
 
 export const chooseSport = (categorySportId) => {
@@ -26,6 +28,27 @@ export const chooseSport = (categorySportId) => {
         //     })
         // dispatch({type: CHOOSE_SPORT, categorySport});
         dispatch({type: CHOOSE_SPORT, payload: categorySportId});
+    }
+}
+
+export const createEvent = (event) =>{
+    return (dispatch, getState, {getFirestore}) => {
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const userId = getState().firebase.auth.uid;
+        firestore.collection('events').add({
+            name: event.name,
+            date: event.datetime,
+            description: event.desc,
+            location: event.location,
+            createdAt: new Date(),
+            userId: userId,
+            categorySport: firestore.doc(`/categorySports/${event.categorySportId}`)
+        }).then(() =>{
+            dispatch({type: CREATE_EVENT_SUCCESS, payload: true});
+        }).catch(() => {
+            dispatch({type: CREATE_EVENT_ERROR, payload: false})
+        });
     }
 }
 

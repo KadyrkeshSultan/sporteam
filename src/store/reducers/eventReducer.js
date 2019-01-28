@@ -1,4 +1,4 @@
-export const CREATE_EVENT = 'CREATE_EVENT';
+export const CREATE_EVENT_SUCCESS = 'CREATE_EVENT_SUCCESS';
 export const CREATE_EVENT_ERROR = 'CREATE_EVENT_ERROR';
 export const CHOOSE_SPORT = 'CHOOSE_SPORT';
 export const CLICK_NEXT_BTN = 'CLICK_NEXT_BTN';
@@ -15,9 +15,11 @@ const initState = {
     eventName: '',
     datetime: new Date(),
     eventDesc: '',
+    createEventIsSuccess: false,
     location: {
         name: '',
         address: '',
+        city: '',
         latitude: 0,
         longitude: 0
     }
@@ -61,12 +63,20 @@ const eventReducer = (state = initState, action) => {
                 ...state,
                 datetime: action.payload
             }
-        case CREATE_EVENT:
-            console.log(CREATE_EVENT, action.event);
-            return state;
+        case CREATE_EVENT_SUCCESS:
+            console.log(CREATE_EVENT_SUCCESS, action.payload);
+            return {
+                ...state,
+                activeStep: state.activeStep + 1,
+                createEventIsSuccess: true
+            };
         case CREATE_EVENT_ERROR:
             console.log(CREATE_EVENT_ERROR, action.error);
-            return state;
+            return {
+                ...state,
+                activeStep: state.activeStep + 1,
+                createEventIsSuccess: false
+            };
         default:
             return state;
     }

@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import EventTimeForm from './EventTimeForm';
 import EventNameForm from './EventNameForm';
+import CreateEventInfo from './CreateEventInfo';
 import Geo from './Geo';
 import SportList from './SportList'
 import {compose} from 'redux'
@@ -20,7 +21,8 @@ import {
     eventNameChange, 
     chooseDate, 
     chooseAddress, 
-    eventDescChange
+    eventDescChange,
+    createEvent
 } from '../../../store/actions/eventActions'
 import { firestoreConnect } from 'react-redux-firebase';
 import EventSummary from './EventSummary';
@@ -115,6 +117,25 @@ class CreateEventForm extends React.Component {
     });
   };
 
+  onClickCreateEventBtn = () =>{
+    const {
+        categorySportId, 
+        eventName, 
+        datetime,
+        location,
+        eventDesc,
+    } = this.props;
+    
+    var event = {
+        name: eventName,
+        desc: eventDesc,
+        datetime: datetime,
+        categorySportId: categorySportId,
+        location: location,
+    };
+
+    this.props.createEvent(event);
+  }
   render() {
     const { classes } = this.props;
     const { activeStep } = this.props;
@@ -135,15 +156,7 @@ class CreateEventForm extends React.Component {
             </Stepper>
             <React.Fragment>
               {activeStep === steps.length ? (
-                <React.Fragment>
-                  <Typography variant="h5" gutterBottom>
-                    Thank you for your order.
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Your order number is #2001539. We have emailed your order confirmation, and will
-                    send you an update when your order has shipped.
-                  </Typography>
-                </React.Fragment>
+                <CreateEventInfo createEventIsSuccess={this.props.createEventIsSuccess} />
               ) : (
                 <React.Fragment>
                   {getStepContent(activeStep, this.props)}
@@ -153,14 +166,19 @@ class CreateEventForm extends React.Component {
                         Назад
                       </Button>
                     )}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={this.props.clickNextBtn}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? 'Создать' : 'Вперед'}
-                    </Button>
+                    {
+                        activeStep === steps.length - 1 ? <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.onClickCreateEventBtn}
+                        className={classes.button}
+                      >Создать</Button> : <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.props.clickNextBtn}
+                                    className={classes.button}
+                                    >Далее</Button>
+                    }
                   </div>
                 </React.Fragment>
               )}
@@ -185,7 +203,8 @@ const mapStateToProps = (state) => {
         eventName: state.event.eventName,
         datetime: state.event.datetime,
         location: state.event.location,
-        eventDesc: state.event.eventDesc
+        eventDesc: state.event.eventDesc,
+        createEventIsSuccess: state.event.createEventIsSuccess
     }
 }
 
@@ -197,7 +216,8 @@ const mapDispatchToProps = (dispatch) =>{
         eventNameChange: (eventName) => dispatch(eventNameChange(eventName)),
         chooseDate: (datetime) => dispatch(chooseDate(datetime)),
         chooseAddress: (location) => dispatch(chooseAddress(location)),
-        eventDescChange: (eventDesc) => dispatch(eventDescChange(eventDesc))
+        eventDescChange: (eventDesc) => dispatch(eventDescChange(eventDesc)),
+        createEvent: (event) => dispatch(createEvent(event))
     }
 }
 
