@@ -5,13 +5,20 @@ export const CLICK_NEXT_BTN = 'CLICK_NEXT_BTN';
 export const CLICK_BACK_BTN = 'CLICK_BACK_BTN';
 export const EVENT_NAME_CHANGE = 'EVENT_NAME_CHANGE';
 export const CHOOSE_DATE = 'CHOOSE_DATE';
+export const CHOOSE_ADDRESS = 'CHOOSE_ADDRESS';
 
 const initState = {
     events : [],
     categorySportId: '1',
     activeStep: 0,
     eventName: '',
-    datetime: new Date()
+    datetime: new Date(),
+    location: {
+        name: '',
+        address: '',
+        latitude: 0,
+        longitude: 0
+    }
 }
 
 const eventReducer = (state = initState, action) => {
@@ -21,6 +28,11 @@ const eventReducer = (state = initState, action) => {
                 ...state,
                 categorySportId: action.payload,
                 activeStep: state.activeStep + 1
+            };
+        case CHOOSE_ADDRESS:
+            return{
+                ...state,
+                location: action.payload
             };
         case EVENT_NAME_CHANGE:
             return{

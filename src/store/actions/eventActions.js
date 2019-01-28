@@ -2,7 +2,8 @@ import { CHOOSE_SPORT,
     CLICK_NEXT_BTN, 
     CLICK_BACK_BTN, 
     EVENT_NAME_CHANGE,
-    CHOOSE_DATE
+    CHOOSE_DATE,
+    CHOOSE_ADDRESS
  } from '../reducers/eventReducer'
 
 export const chooseSport = (categorySportId) => {
@@ -30,6 +31,12 @@ export const chooseSport = (categorySportId) => {
 export const chooseDate = (datetime) =>{
     return (dispatch) => {
         dispatch({type: CHOOSE_DATE, payload: datetime});
+    }
+}
+
+export const chooseAddress = (location) =>{
+    return (dispatch) => {
+        dispatch({type: CHOOSE_ADDRESS, payload: location});
     }
 }
 

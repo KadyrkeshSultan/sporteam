@@ -13,7 +13,7 @@ import Geo from './Geo';
 import SportList from './SportList'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
-import {clickNextBtn, clickBackBtn, chooseSport, eventNameChange, chooseDate} from '../../../store/actions/eventActions'
+import {clickNextBtn, clickBackBtn, chooseSport, eventNameChange, chooseDate, chooseAddress} from '../../../store/actions/eventActions'
 import { firestoreConnect } from 'react-redux-firebase';
 
 const styles = theme => ({
@@ -53,10 +53,19 @@ const styles = theme => ({
   },
 });
 
-const steps = ['', '', '', ''];
+const steps = ['', '', '', '', ''];
 
 function getStepContent(step, props) {
-    const {chooseSport, categorySports, categorySportId, eventNameChange, eventName, datetime, chooseDate} = props;
+    const {
+        chooseSport, 
+        categorySports, 
+        categorySportId, 
+        eventNameChange, 
+        eventName, 
+        datetime,
+        chooseAddress,
+        location, 
+        chooseDate} = props;
   switch (step) {
     case 0:
       return <SportList categorySports={categorySports} chooseSport={chooseSport}/>;
@@ -70,7 +79,7 @@ function getStepContent(step, props) {
     case 2:
       return <EventTimeForm datetime={datetime} chooseDate={chooseDate} />;
     case 3:
-        return <Geo />;
+        return <Geo location={location} chooseAddress={chooseAddress} />;
     default:
       throw new Error('Unknown step');
   }
@@ -152,6 +161,7 @@ const mapStateToProps = (state) => {
         categorySportId: state.event.categorySportId,
         eventName: state.event.eventName,
         datetime: state.event.datetime,
+        location: state.event.location
     }
 }
 
@@ -161,7 +171,8 @@ const mapDispatchToProps = (dispatch) =>{
         clickBackBtn: () => dispatch(clickBackBtn()),
         chooseSport: (categorySportId) => dispatch(chooseSport(categorySportId)),
         eventNameChange: (eventName) => dispatch(eventNameChange(eventName)),
-        chooseDate: (datetime) => dispatch(chooseDate(datetime))
+        chooseDate: (datetime) => dispatch(chooseDate(datetime)),
+        chooseAddress: (location) => dispatch(chooseAddress(location))
     }
 }
 
