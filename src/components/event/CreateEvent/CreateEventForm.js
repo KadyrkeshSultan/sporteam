@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import EventTimeForm from './EventTimeForm';
 import EventNameForm from './EventNameForm';
+import Geo from './Geo';
 import SportList from './SportList'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
@@ -52,7 +53,7 @@ const styles = theme => ({
   },
 });
 
-const steps = ['', '', ''];
+const steps = ['', '', '', ''];
 
 function getStepContent(step, props) {
     const {chooseSport, categorySports, categorySportId, eventNameChange, eventName, datetime, chooseDate} = props;
@@ -68,6 +69,8 @@ function getStepContent(step, props) {
        />;
     case 2:
       return <EventTimeForm datetime={datetime} chooseDate={chooseDate} />;
+    case 3:
+        return <Geo />;
     default:
       throw new Error('Unknown step');
   }

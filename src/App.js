@@ -6,7 +6,6 @@ import EventList from './components/event/EventList'
 import Dashboard from './components/dashboard/Dashboard'
 import CreateEventForm from './components/event/CreateEvent/CreateEventForm'
 import MobileStep from './components/event/CreateEvent/MobileStep'
-
 class App extends Component {
   render() {
     return (
