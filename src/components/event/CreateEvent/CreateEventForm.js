@@ -7,6 +7,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Redirect } from 'react-router-dom'
 import EventTimeForm from './EventTimeForm';
 import EventNameForm from './EventNameForm';
 import CreateEventInfo from './CreateEventInfo';
@@ -137,9 +138,11 @@ class CreateEventForm extends React.Component {
     this.props.createEvent(event);
   }
   render() {
-    const { classes } = this.props;
+    const { classes, auth } = this.props;
     const { activeStep } = this.props;
-    console.log(this.props);
+    
+    if(!auth.uid) return <Redirect to='/login' />
+
     return (
       <React.Fragment>
         <main className={classes.layout}>
@@ -204,7 +207,8 @@ const mapStateToProps = (state) => {
         datetime: state.event.datetime,
         location: state.event.location,
         eventDesc: state.event.eventDesc,
-        createEventIsSuccess: state.event.createEventIsSuccess
+        createEventIsSuccess: state.event.createEventIsSuccess,
+        auth: state.firebase.auth
     }
 }
 

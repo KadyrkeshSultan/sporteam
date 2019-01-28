@@ -13,9 +13,9 @@ class App extends Component {
           <ButtonAppBar />
           <Switch>
             <Route path='/login' component={SignIn} />
-            <Route path='/events' component={EventList} />
+            <Route exact path='/events' component={EventList} />
             <Route path='/board' component={Dashboard} />
-            <Route path='/checkout' component={CreateEventForm} />
+            <Route path='/events/create' component={CreateEventForm} />
           </Switch>
         </div>
       </BrowserRouter>
