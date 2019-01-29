@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import SignIn from './components/auth/SignIn'
+import SignUp from './components/auth/SignUp'
 import ButtonAppBar from './components/layout/ButtonAppBar'
 import EventList from './components/event/EventList'
 import Dashboard from './components/dashboard/Dashboard'
@@ -13,6 +14,7 @@ class App extends Component {
           <ButtonAppBar />
           <Switch>
             <Route path='/login' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
             <Route exact path='/events' component={EventList} />
             <Route path='/board' component={Dashboard} />
             <Route path='/events/create' component={CreateEventForm} />
