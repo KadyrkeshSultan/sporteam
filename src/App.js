@@ -6,6 +6,7 @@ import ButtonAppBar from './components/layout/ButtonAppBar'
 import EventList from './components/event/EventList'
 import Dashboard from './components/dashboard/Dashboard'
 import CreateEventForm from './components/event/CreateEvent/CreateEventForm'
+import Footer from './components/layout/Footer';
 class App extends Component {
   render() {
     return (
@@ -19,6 +20,7 @@ class App extends Component {
             <Route path='/board' component={Dashboard} />
             <Route path='/events/create' component={CreateEventForm} />
           </Switch>
+          <Footer />
         </div>
       </BrowserRouter>
     );
