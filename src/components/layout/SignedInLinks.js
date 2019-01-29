@@ -6,7 +6,7 @@ import React from 'react'
 const SignedInLinks = (props) => {
   return (
       <React.Fragment>
-        <Button onClick={props.signOut} color='inherit'>Выйти</Button>
+        <Button color="primary" variant="outlined" onClick={props.signOut} color='inherit'>Выйти</Button>
     </React.Fragment>
   )
 }
