@@ -19,6 +19,12 @@ const styles = theme => ({
     maxWidth: 752,
     width: '100%'
   },
+  list:{
+    width: '100%',
+    position: 'relative',
+    overflow: 'auto',
+    maxHeight: 250,
+  },
   demo: {
     backgroundColor: theme.palette.background.paper,
   },
@@ -41,7 +47,7 @@ class SportList extends React.Component {
               Выберите вид спорта
             </Typography>
             <div className={classes.demo}>
-              <List dense={dense}>
+              <List dense={dense} className={classes.list}>
                 {
                     categorySports && categorySports.map((sport) => {
                         return <ListItem key={sport.id} id={sport.id} button onClick={(e) =>{chooseSport(e.currentTarget.id)}}>

@@ -42,7 +42,11 @@ export const createEvent = (event) =>{
             description: event.desc,
             location: event.location,
             createdAt: new Date(),
-            userId: userId,
+            user: {
+                id:userId,
+                firstName: profile.firstName,
+                lastName: profile.lastName,
+            },
             categorySport: firestore.doc(`/categorySports/${event.categorySportId}`)
         }).then(() =>{
             dispatch({type: CREATE_EVENT_SUCCESS, payload: true});
