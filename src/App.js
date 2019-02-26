@@ -7,6 +7,7 @@ import EventList from './components/event/EventList'
 import Dashboard from './components/dashboard/Dashboard'
 import CreateEventForm from './components/event/CreateEvent/CreateEventForm'
 import Footer from './components/layout/Footer';
+import MainBoard from './components/mainboard/MainBoard';
 class App extends Component {
   render() {
     return (
@@ -14,6 +15,7 @@ class App extends Component {
         <div className="App">
           <ButtonAppBar />
           <Switch>
+            <Route exact path='/main' component={MainBoard}/>
             <Route path='/login' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route exact path='/events' component={EventList} />
