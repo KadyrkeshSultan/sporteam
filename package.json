@@ -14,6 +14,7 @@
     "mui-places-autocomplete": "^2.0.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-materialize": "^2.6.0",
     "react-parallax": "^2.2.0",
     "react-redux": "^5.0.7",
     "react-redux-firebase": "^2.1.6",

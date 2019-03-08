@@ -5,7 +5,7 @@ class EventCard extends React.Component{
         const { date, name, sportType, location, image } = this.props;
 
         return <React.Fragment>
-            <div class="col s12 m3">
+            <div class="col s12 m6 l3">
                 <div class="card small">
                     <div class="card-image">
                         <img src={image} />
