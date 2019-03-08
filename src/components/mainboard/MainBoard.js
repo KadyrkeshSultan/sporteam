@@ -2,6 +2,7 @@ import React from 'react'
 import Banner from './Banner';
 import EventsGrid from './EventsGrid';
 import AreaGrid from './AreaGrid';
+import MapPlaces from './MapPlaces';
 
 class MainBoard extends React.Component{
     render(){
@@ -11,6 +12,7 @@ class MainBoard extends React.Component{
                 <div class="section">
                     <EventsGrid/>
                     <AreaGrid/>
+                    <MapPlaces/>
                 </div>
             </div>
         </React.Fragment>

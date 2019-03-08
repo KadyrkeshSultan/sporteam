@@ -7,7 +7,7 @@ const areas=[
         name:"Ледовая площадка ДС Крылья Советов",
         location:"Москва, М.Калужская ул, 15",
         sportTypes:"Волейбол, баскетбол",
-        image:"https://zhazhda.biz/wp-content/uploads/2016/10/2-14-630x400.jpg",
+        image:"https://minsknews.by/wp-content/uploads/2014/06/Dvorets-sporta.jpg",
     },
     {
         id:2,
@@ -21,14 +21,14 @@ const areas=[
         name:"Ледовая площадка ДС Крылья Советов",
         location:"Москва, М.Калужская ул, 15",
         sportTypes:"Волейбол, баскетбол",
-        image:"https://zhazhda.biz/wp-content/uploads/2016/10/2-14-630x400.jpg",
+        image:"http://web.kpi.kharkov.ua/hostels/wp-content/uploads/sites/172/2017/02/metallist_kharkov_5.jpg",
     },
     {
         id:4,
         name:"Ледовая площадка ДС Крылья Советов",
         location:"Москва, М.Калужская ул, 15",
         sportTypes:"Волейбол, баскетбол",
-        image:"https://zhazhda.biz/wp-content/uploads/2016/10/2-14-630x400.jpg",
+        image:"https://www.primorsky.ru/upload/iblock/52e/52e6c902feab7da32fab83562c4aa019.jpg",
     },
 ]
 class AreaGrid extends React.Component{
