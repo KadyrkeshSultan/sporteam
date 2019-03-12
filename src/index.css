@@ -27,3 +27,13 @@ body {
   .col{
     width:50%;
   }
+  .card-image img{
+    object-fit: cover;
+    height: 150px;
+    width: 50%;
+    
+  }
+  .card .card-content {
+    padding: 12px;
+    border-radius: 0 0 2px 2px;
+}
