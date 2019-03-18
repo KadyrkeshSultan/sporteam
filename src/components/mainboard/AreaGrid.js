@@ -41,8 +41,8 @@ class AreaGrid extends React.Component{
         <Grid container spacing={24}>
             {
                 areas.map((item) =>{
-                    return <Grid item xs={12} sm={6} md={6} lg={3}>
-                    <AreaCard key={item.id}
+                    return <Grid key={item.id} item xs={12} sm={6} md={6} lg={3}>
+                    <AreaCard 
                         name={item.name}
                         location={item.location}
                         sportType={item.sportType}

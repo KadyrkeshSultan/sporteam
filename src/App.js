@@ -16,7 +16,7 @@ class App extends Component {
         <div className="App">
           <ButtonAppBar />
           <Switch>
-            <Route exact path='/main' component={MainBoard} />
+            <Route exact path='/' component={MainBoard} />
             <Route path='/login' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route exact path='/events' component={EventList} />

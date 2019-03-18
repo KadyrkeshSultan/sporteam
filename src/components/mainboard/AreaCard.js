@@ -30,7 +30,7 @@ class AreaCard extends React.Component {
                         {sportTypes}
                     </Typography>
                     <Typography variant="inherit" noWrap>
-                        <i class="fas fa-location-arrow"></i>{location}
+                        <i className="fas fa-location-arrow"></i>{location}
                     </Typography>
                 </CardContent>
             </CardActionArea>
