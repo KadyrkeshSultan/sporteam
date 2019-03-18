@@ -8,6 +8,9 @@ import EventsGrid from './EventsGrid';
 import AreaGrid from './AreaGrid';
 import MapPlaces from './MapPlaces';
 import CarouselMain from './CarouselMain';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 
 const styles = theme => ({
     icon: {
@@ -33,7 +36,7 @@ const styles = theme => ({
     // },
     // cardMedia: {
     //     paddingTop: '56.25%', // 16:9
-        
+
     // },
     // cardContent: {
     //     flexGrow: 1,
@@ -41,25 +44,51 @@ const styles = theme => ({
 
 });
 
-function MainBoard(props) {
-    const { classes } = props;
+class MainBoard extends React.Component {
+    render() {
+        const { classes, events } = this.props;
 
-    return (
-        <React.Fragment>
+        return <React.Fragment>
             <CssBaseline />
             {/* <Banner /> */}
             <div className={classNames(classes.layout, classes.cardGrid)}>
-                <CarouselMain/>
-                <EventsGrid />
+                <CarouselMain />
+                <EventsGrid events={events} />
                 <AreaGrid />
                 <MapPlaces />
-                </div>
+            </div>
         </React.Fragment>
-    );
+    }
 }
 
 MainBoard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MainBoard);
+const mapStateToProps = (state) => {
+    console.log("main", state);
+    return {
+        auth: state.firebase.auth,
+        events: state.firestore.ordered.events,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+    }
+}
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([
+        {
+            collection: 'events',
+            orderBy: [
+                ['date', 'desc']
+            ],
+            limit: 4
+        }
+    ])
+)(MainBoard);

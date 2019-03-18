@@ -50,8 +50,8 @@ class MapPlaces extends React.Component {
           </Tabs>
 
         </AppBar>
-        {value === 0 && <TabContainer><br/><iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Af5a217ff4e2b68222d3a6fc45d1d58611a8dfefa31b95d6ec074d1a3a2ec6d08&amp;source=constructor" width="100%" height="600" frameborder="0"></iframe></TabContainer>}
-        {value === 1 && <TabContainer><br/><iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Af5a217ff4e2b68222d3a6fc45d1d58611a8dfefa31b95d6ec074d1a3a2ec6d08&amp;source=constructor" width="100%" height="600" frameborder="0"></iframe></TabContainer>}
+        {value === 0 && <TabContainer><br/><iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Af5a217ff4e2b68222d3a6fc45d1d58611a8dfefa31b95d6ec074d1a3a2ec6d08&amp;source=constructor" width="100%" height="600" frameBorder="0"></iframe></TabContainer>}
+        {value === 1 && <TabContainer><br/><iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Af5a217ff4e2b68222d3a6fc45d1d58611a8dfefa31b95d6ec074d1a3a2ec6d08&amp;source=constructor" width="100%" height="600" frameBorder="0"></iframe></TabContainer>}
 
       </React.Fragment>
     );
