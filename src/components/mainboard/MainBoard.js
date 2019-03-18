@@ -86,7 +86,7 @@ export default compose(
         {
             collection: 'events',
             orderBy: [
-                ['date', 'desc']
+                ['createdAt', 'desc']
             ],
             limit: 4
         }
