@@ -1,5 +1,6 @@
 import React from 'react';
 import AreaCard from './AreaCard';
+import { Grid } from '@material-ui/core';
 
 const areas=[
     {
@@ -7,47 +8,50 @@ const areas=[
         name:"Ледовая площадка ДС Крылья Советов",
         location:"Москва, М.Калужская ул, 15",
         sportTypes:"Волейбол, баскетбол",
-        image:"https://minsknews.by/wp-content/uploads/2014/06/Dvorets-sporta.jpg",
+        image:"https://regions.kidsreview.ru/sites/default/files/styles/card_600_400/public/07/28/2014_-_2017/aysberg.jpg",
     },
     {
         id:2,
         name:"Ледовая площадка ДС Крылья Советов",
         location:"Москва, М.Калужская ул, 15",
         sportTypes:"Волейбол, баскетбол",
-        image:"https://zhazhda.biz/wp-content/uploads/2016/10/2-14-630x400.jpg",
+        image:"https://s1.1zoom.ru/b4948/Footbal_Ball_Lawn_Stadium_561095_300x225.jpg",
     },
     {
         id:3,
         name:"Ледовая площадка ДС Крылья Советов",
         location:"Москва, М.Калужская ул, 15",
         sportTypes:"Волейбол, баскетбол",
-        image:"http://web.kpi.kharkov.ua/hostels/wp-content/uploads/sites/172/2017/02/metallist_kharkov_5.jpg",
+        image:"https://www.soccerphile.com/soccerphile/euro2012/im/metalist-stadium-1.jpg",
     },
     {
         id:4,
         name:"Ледовая площадка ДС Крылья Советов",
         location:"Москва, М.Калужская ул, 15",
         sportTypes:"Волейбол, баскетбол",
-        image:"https://www.primorsky.ru/upload/iblock/52e/52e6c902feab7da32fab83562c4aa019.jpg",
+        image:"https://s3-eu-west-1.amazonaws.com/civil-files/2017_poltava_projects/53.jpg",
     },
 ]
 class AreaGrid extends React.Component{
     
     render(){
         return <React.Fragment>
-            <h5>ПОПУЛЯРНЫЕ МЕСТА</h5>
-            <div class="row">
-                {
-                    areas.map((item) =>{
-                        return <AreaCard key={item.id}
-                            name={item.name}
-                            location={item.location}
-                            sportTypes={item.sportTypes}
-                            image={item.image} />
-                    })
-                }
-            </div>
-        </React.Fragment>
+        <h2 style={{fontWeight: '400'}}>ПОПУЛЯРНЫЕ МЕСТА</h2>
+        
+        <Grid container spacing={24}>
+            {
+                areas.map((item) =>{
+                    return <Grid item xs={12} sm={6} md={6} lg={3}>
+                    <AreaCard key={item.id}
+                        name={item.name}
+                        location={item.location}
+                        sportType={item.sportType}
+                        image={item.image} />
+                        </Grid>
+                })
+            }
+            </Grid>           
+    </React.Fragment>
     }
 }
 export default AreaGrid;

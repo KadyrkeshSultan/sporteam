@@ -20,9 +20,11 @@
     "react-redux-firebase": "^2.1.6",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
+    "react-slick": "^0.23.2",
     "redux": "^4.0.0",
     "redux-firestore": "^0.5.7",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",

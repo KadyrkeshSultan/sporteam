@@ -1,12 +1,13 @@
 import React from 'react';
 import EventCard from './EventCard';
+import { Grid } from '@material-ui/core';
 
 const events = [
     {
         id: 1,
         date: "20 сентября",
         name: "Наша игра",
-        location: "Москва, Б.Сергиевский пер, 20",
+        location: " Москва, Б.Сергиевский пер, 20",
         sportType: "Баскетбол",
         image: "http://cdn.chatsports.com/thumbnails/5091-69818-original.jpeg",
     },
@@ -14,7 +15,7 @@ const events = [
         id: 2,
         date: "4 мая",
         name: "Тренировка в Карелии",
-        location: "Екатеринбург, Б.Сергиевский пер, 20",
+        location: " Екатеринбург, Б.Сергиевский пер, 20",
         sportType: "Академическая гребля",
         image: "https://st3.depositphotos.com/1029233/16183/i/450/depositphotos_161830512-stock-photo-friends-group-having-fun-together.jpg",
     },
@@ -22,35 +23,38 @@ const events = [
         id: 3,
         date: "15 августа",
         name: "Матч Спартак-Динамо",
-        location: "Новосибирск, Красный проспект",
+        location: " Новосибирск, Красный проспект",
         sportType: "Волейбол",
-        image: "https://www.volleyballgearguide.com/wp-content/uploads/2018/11/volleyball-players-1024x616.jpg",
+        image: "data:image/jpeg;base64,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",
     },
     {
         id: 4,
         date: "24 сентября",
         name: "Пробежка по средам",
-        location: "Санкт-Петербург, ул.Московская",
+        location: " Санкт-Петербург, ул.Московская",
         sportType: "Бег",
-        image: "https://i1.wp.com/www.lifemartini.com/wp-content/uploads/2015/03/Combine-Aerobics-And-Anaerobic-Exercises.jpg?resize=650%2C400",
+        image: "http://www.fvc.by/images/uslugi/06.jpg",
     }
 ]
 class EventsGrid extends React.Component{
     render(){
         return <React.Fragment>
-            <h5>БЛИЖАЙШИЕ МЕРОПРИЯТИЯ</h5>
-            <div class="row">
+            <h2 style={{fontWeight: '400'}}>БЛИЖАЙШИЕ МЕРОПРИЯТИЯ</h2>
+            
+            <Grid container spacing={24}>
                 {
                     events.map((item) =>{
-                        return <EventCard key={item.id}
+                        return <Grid item xs={12} sm={6} md={6} lg={3}>
+                        <EventCard key={item.id}
                             date={item.date}
                             name={item.name}
                             location={item.location}
                             sportType={item.sportType}
                             image={item.image} />
+                            </Grid>
                     })
                 }
-            </div>
+                </Grid>           
         </React.Fragment>
     }
 }
