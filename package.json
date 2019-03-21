@@ -18,6 +18,7 @@
     "react-parallax": "^2.2.0",
     "react-redux": "^5.0.7",
     "react-redux-firebase": "^2.1.6",
+    "react-responsive-carousel": "^3.1.47",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-slick": "^0.23.2",
