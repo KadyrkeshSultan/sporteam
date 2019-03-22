@@ -9,6 +9,7 @@ import CreateEventForm from './components/event/CreateEvent/CreateEventForm'
 import Footer from './components/layout/Footer';
 import MainBoard from './components/mainboard/MainBoard';
 import EventBoard from './components/mainboard/EventBoard';
+import AreaBoard from './components/mainboard/AreaBoard';
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
             <Route path='/board' component={Dashboard} />
             <Route path='/events/create' component={CreateEventForm} />
             <Route path='/EventBoard' component={EventBoard} />
+            <Route path='/AreaBoard' component={AreaBoard} />
           </Switch>
           <Footer />
         </div>
