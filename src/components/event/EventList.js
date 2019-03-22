@@ -84,7 +84,7 @@ function EventList(props) {
         </div>
         <div className={classNames(classes.layout, classes.cardGrid)}>
           {/* End hero unit */}
-          <Grid container direction="row" justify="center" alignItems="center" spacing={40}>
+          <Grid container spacing={24}>
             {events && events.map(event => (
               <Grid item key={event.id} sm={6} md={4} lg={3} style={{width: '100%'}} >
                     <EventCard event={event} />
