@@ -10,6 +10,8 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 import 'moment/locale/ru';
+import {selectEvent} from '../../store/actions/eventActions';
+import {Redirect} from 'react-router';
 
 const styles = {
     card: {
@@ -26,14 +28,24 @@ const styles = {
     }
 }
 class EventCard extends React.Component {
+    state = {
+        redirect: false
+    }
+    handleCardClick = (e) =>{
+        this.props.selectEvent(e.currentTarget.id);
+        this.setState({redirect: true});
+    }
     render() {
+        if (this.state.redirect) {
+            return <Redirect push to="/eventboard" />;
+        }
         const { event, categorySports } = this.props;
         const loaderPic = "https://thumbs.gfycat.com/ArcticWarmBettong-max-1mb.gif";
         const categorySport = categorySports && categorySports.find((item) => { return item.id === event.categorySport.id })
 
         return (
             <Card style={styles.card}>
-                <CardActionArea >
+                <CardActionArea id={event && event.id} onClick={this.handleCardClick}>
                     <div style={{
                         height: '140px',
                         overflow: 'hidden',
@@ -70,8 +82,15 @@ const mapStateToProps = (state) => {
         categorySports: state.firestore.ordered.categorySports
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        selectEvent: (id) => dispatch(selectEvent(id))
+    }
+}
+
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
         { collection: 'categorySports' }
     ])

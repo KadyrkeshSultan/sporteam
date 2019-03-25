@@ -6,7 +6,8 @@ import { CHOOSE_SPORT,
     CHOOSE_ADDRESS,
     EVENT_DESC_CHANGE,
     CREATE_EVENT_SUCCESS,
-    CREATE_EVENT_ERROR
+    CREATE_EVENT_ERROR,
+    SELECT_EVENT
  } from '../reducers/eventReducer'
 
 export const chooseSport = (categorySportId) => {
@@ -28,6 +29,22 @@ export const chooseSport = (categorySportId) => {
         //     })
         // dispatch({type: CHOOSE_SPORT, categorySport});
         dispatch({type: CHOOSE_SPORT, payload: categorySportId});
+    }
+}
+
+export const selectEvent = (id) =>{
+    return (dispatch, getState, {getFirestore}) =>{
+        const firestore = getFirestore();
+        var docRef = firestore.collection('events').doc(id);
+        docRef.get().then(function(doc){
+            if(doc.exists){
+                dispatch({type: SELECT_EVENT, payload: {...doc.data(), id: id}});
+            }else{
+                dispatch({type: SELECT_EVENT, payload: {id: null}});
+            }
+        }).catch(function(error){
+            dispatch({type: SELECT_EVENT, payload: {id: null}});
+        })
     }
 }
 

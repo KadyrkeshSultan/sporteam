@@ -7,8 +7,12 @@ export const EVENT_NAME_CHANGE = 'EVENT_NAME_CHANGE';
 export const CHOOSE_DATE = 'CHOOSE_DATE';
 export const CHOOSE_ADDRESS = 'CHOOSE_ADDRESS';
 export const EVENT_DESC_CHANGE = 'EVENT_DESC_CHANGE';
+export const SELECT_EVENT = 'SELECT_EVENT';
 
 const initState = {
+    selectEvent: {
+        id: null
+    },
     events : [],
     categorySportId: '1',
     activeStep: 0,
@@ -76,6 +80,12 @@ const eventReducer = (state = initState, action) => {
                 ...state,
                 activeStep: state.activeStep + 1,
                 createEventIsSuccess: false
+            };
+        case SELECT_EVENT:
+            console.log(SELECT_EVENT, action.payload);
+            return{
+                ...state,
+                selectEvent: action.payload
             };
         default:
             return state;
