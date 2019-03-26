@@ -60,7 +60,7 @@ class EventSummary extends React.Component {
             <Typography variant="subtitle1" style={{fontWeight: '700',}}>
             {event.location.address}
             </Typography>
-            <Typography variant="h5" align='center' gutterBottom>
+            <Typography variant="h6" align='center' gutterBottom>
                 Дополнительная информация
             </Typography>
             <TextField required id='eventDescription' label='Введите доп.информацию' onChange={this.onEventDescChange} value={event.desc} fullWidth/>
