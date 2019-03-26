@@ -9,7 +9,14 @@ import EventCard from './EventCard'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import EventDialog from './EventDialog';
 
 const styles = theme => ({
   appBar: {
@@ -56,43 +63,83 @@ const styles = theme => ({
   },
 });
 
-function EventList(props) {
-  const { classes, events } = props;
-  return (
-    <React.Fragment>
-      <main>
-        {/* Hero unit */}
-        <div className={classes.heroUnit}>
-          <div className={classes.heroContent}>
-            <Typography component="h1" variant="h4" align="center" color="textPrimary" gutterBottom>
-              Все события
+class EventList extends React.Component {
+  state = {
+    open: false,
+  };
+  
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+  render() {
+    const { classes, events } = this.props;
+    return (
+      <React.Fragment>
+        <main>
+          {/* Hero unit */}
+          <div className={classes.heroUnit}>
+            <div className={classes.heroContent}>
+              <Typography component="h1" variant="h4" align="center" color="textPrimary" gutterBottom>
+                Все события
             </Typography>
-            <Typography variant="h6" align="center" color="textSecondary" paragraph>
-              Найдите подходящее вам событие или создайте событие
+              <Typography variant="h6" align="center" color="textSecondary" paragraph>
+                Найдите подходящее вам событие или создайте событие
             </Typography>
-            <div className={classes.heroButtons}>
-              <Grid container  justify="center">
+              <div className={classes.heroButtons}>
+                <Grid container justify="center">
                   <Button variant="outlined" color="default" component={Link} to="/events/create">
                     Создать событие
                   </Button>
-              </Grid>
+                  &nbsp;
+                  <div>
+                    <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                      Фильтр
+                </Button>
+                    <Dialog
+                      open={this.state.open}
+                      onClose={this.handleClose}
+                      fullWidth={true}
+                      maxWidth={'sm'}
+                      aria-labelledby="form-dialog-title"
+                    >
+                      <DialogTitle id="form-dialog-title">Фильтр</DialogTitle>
+                      <DialogContent>
+                      <EventDialog/>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                          Отмена
+            </Button>
+                        <Button onClick={this.handleClose} color="primary">
+                          Применить
+            </Button>
+                      </DialogActions>
+                    </Dialog>
+                  </div>
+                </Grid>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={classNames(classes.layout, classes.cardGrid)}>
-          {/* End hero unit */}
-          <Grid container spacing={24}>
-            {events && events.map(event => (
-              <Grid item key={event.id} sm={6} md={4} lg={3} style={{width: '100%'}} >
-                    <EventCard event={event} />
-              </Grid>
-            ))}
-          </Grid>
-        </div>
-      </main>
-      
-    </React.Fragment>
-  );
+          <div className={classNames(classes.layout, classes.cardGrid)}>
+            {/* End hero unit */}
+            <Grid container spacing={24}>
+              {events && events.map(event => (
+                <Grid item key={event.id} sm={6} md={4} lg={3} style={{ width: '100%' }} >
+                  <EventCard event={event} />
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        </main>
+
+      </React.Fragment>
+    );
+  }
 }
 
 EventList.propTypes = {
@@ -100,14 +147,14 @@ EventList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    return {
-        events: state.firestore.ordered.events,
-    }
+  return {
+    events: state.firestore.ordered.events,
+  }
 }
 export default compose(
-    withStyles(styles),
-    connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'events'},
-    ])
+  withStyles(styles),
+  connect(mapStateToProps),
+  firestoreConnect([
+    { collection: 'events' },
+  ])
 )(EventList)
