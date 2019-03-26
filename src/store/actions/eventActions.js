@@ -12,22 +12,6 @@ import { CHOOSE_SPORT,
 
 export const chooseSport = (categorySportId) => {
     return (dispatch, getState, {getFirebase, getFirestore}) =>{
-        // const firestore = getFirestore();
-        // var categorySportRef = firestore.collection('categorySports').doc(categorySportId);
-        // var categorySport = {};
-        // categorySportRef.get()
-        //     .then(doc => {
-        //         if(!doc.exists){
-        //             console.log('--> eventAction');
-        //         }else{
-        //             categorySport = {...doc.data(), id: categorySportId};
-        //             console.log(categorySport);
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.log('--> eventAction', err);
-        //     })
-        // dispatch({type: CHOOSE_SPORT, categorySport});
         dispatch({type: CHOOSE_SPORT, payload: categorySportId});
     }
 }

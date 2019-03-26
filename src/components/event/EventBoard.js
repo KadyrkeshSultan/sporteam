@@ -105,7 +105,7 @@ class EventBoard extends React.Component {
                         <h5 style={{ fontWeight: '400' }}>Организатор</h5>
                         <Card className={classes.card}>
                             {/* <CardMedia className={classes.cover} component="img" image={"https://2ch.hk/fag/thumb/5996336/15385501684090s.jpg"} />    */}
-                            <Avatar src="https://2ch.hk/fag/thumb/5996336/15385501684090s.jpg" className={classes.bigAvatar} />
+                            <Avatar className={classes.bigAvatar}>{event.id && event.user.firstName[0] + event.user.lastName[0]}</Avatar>
                             <div className={classes.details}>
                                 <CardContent className={classes.content}>
                                     {/* <Typography component="p" >{event.id && event.user}</Typography> */}
