@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import Banner from './Banner';
 import EventsGrid from '../event/EventsGrid';
-import AreaGrid from './AreaGrid';
+import AreaGrid from '../area/AreaGrid';
 import MapPlaces from './MapPlaces';
 import CarouselMain from './CarouselMain';
 import { compose } from 'redux';
