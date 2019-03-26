@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import Banner from './Banner';
-import EventsGrid from './EventsGrid';
+import EventsGrid from '../event/EventsGrid';
 import AreaGrid from './AreaGrid';
 import MapPlaces from './MapPlaces';
 import CarouselMain from './CarouselMain';

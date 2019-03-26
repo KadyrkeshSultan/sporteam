@@ -9,7 +9,7 @@ import EventCard from './EventCard'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   appBar: {
@@ -17,9 +17,6 @@ const styles = theme => ({
   },
   icon: {
     marginRight: theme.spacing.unit * 2,
-  },
-  heroUnit: {
-    backgroundColor: theme.palette.background.paper,
   },
   heroContent: {
     maxWidth: 600,
@@ -75,7 +72,7 @@ function EventList(props) {
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container  justify="center">
-                  <Button variant="contained" color="primary">
+                  <Button variant="outlined" color="default" component={Link} to="/events/create">
                     Создать событие
                   </Button>
               </Grid>
@@ -93,16 +90,7 @@ function EventList(props) {
           </Grid>
         </div>
       </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
-        </Typography>
-      </footer>
-      {/* End footer */}
+      
     </React.Fragment>
   );
 }

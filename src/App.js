@@ -8,7 +8,7 @@ import Dashboard from './components/dashboard/Dashboard'
 import CreateEventForm from './components/event/CreateEvent/CreateEventForm'
 import Footer from './components/layout/Footer';
 import MainBoard from './components/mainboard/MainBoard';
-import EventBoard from './components/eventboard/EventBoard';
+import EventBoard from './components/event/EventBoard';
 import AreaBoard from './components/areaboard/AreaBoard';
 
 class App extends Component {
