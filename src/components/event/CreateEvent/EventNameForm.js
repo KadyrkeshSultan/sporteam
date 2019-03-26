@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 
-class PaymentForm extends React.Component {
+class EventNameForm extends React.Component {
     onEventNameChange = e =>{
         const eventName = e.currentTarget.value;
         this.props.eventNameChange(eventName);
@@ -37,15 +37,4 @@ class PaymentForm extends React.Component {
     }
 }
 
-export default PaymentForm;
-
-// const mapStateToProps = (state) => {
-//     console.log(state);
-//     return {
-//         categorySportId: state.event.categorySportId
-//     }
-// }
-
-// export default compose(
-//     connect(mapStateToProps)
-// )(PaymentForm)
+export default EventNameForm;
