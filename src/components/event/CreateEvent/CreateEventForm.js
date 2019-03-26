@@ -13,15 +13,15 @@ import EventNameForm from './EventNameForm';
 import CreateEventInfo from './CreateEventInfo';
 import Geo from './Geo';
 import SportList from './SportList'
-import {compose} from 'redux'
-import {connect} from 'react-redux'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import {
-    clickNextBtn, 
-    clickBackBtn, 
-    chooseSport, 
-    eventNameChange, 
-    chooseDate, 
-    chooseAddress, 
+    clickNextBtn,
+    clickBackBtn,
+    chooseSport,
+    eventNameChange,
+    chooseDate,
+    chooseAddress,
     eventDescChange,
     createEvent
 } from '../../../store/actions/eventActions'
@@ -29,172 +29,172 @@ import { firestoreConnect } from 'react-redux-firebase';
 import EventSummary from './EventSummary';
 
 const styles = theme => ({
-  appBar: {
-    position: 'relative',
-  },
-  layout: {
-    width: 'auto',
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2,
-    [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
-      width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
+    appBar: {
+        position: 'relative',
     },
-  },
-  paper: {
-    marginTop: theme.spacing.unit * 3,
-    marginBottom: theme.spacing.unit * 3,
-    padding: theme.spacing.unit * 2,
-    [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
-      marginTop: theme.spacing.unit * 6,
-      marginBottom: theme.spacing.unit * 6,
-      padding: theme.spacing.unit * 3,
+    layout: {
+        width: 'auto',
+        marginLeft: theme.spacing.unit * 2,
+        marginRight: theme.spacing.unit * 2,
+        [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
+            width: 600,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
     },
-  },
-  stepper: {
-    padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`,
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  button: {
-    marginTop: theme.spacing.unit * 3,
-    marginLeft: theme.spacing.unit,
-  },
+    paper: {
+        marginTop: theme.spacing.unit * 3,
+        marginBottom: theme.spacing.unit * 3,
+        padding: theme.spacing.unit * 2,
+        [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
+            marginTop: theme.spacing.unit * 6,
+            marginBottom: theme.spacing.unit * 6,
+            padding: theme.spacing.unit * 3,
+        },
+    },
+    stepper: {
+        padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`,
+    },
+    buttons: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
+    button: {
+        marginTop: theme.spacing.unit * 3,
+        marginLeft: theme.spacing.unit,
+    },
 });
 
 const steps = ['', '', '', '', ''];
 
 function getStepContent(step, props) {
     const {
-        chooseSport, 
-        categorySports, 
-        categorySportId, 
-        eventNameChange, 
-        eventName, 
+        chooseSport,
+        categorySports,
+        categorySportId,
+        eventNameChange,
+        eventName,
         datetime,
         chooseAddress,
         location,
         eventDesc,
-        eventDescChange, 
-        chooseDate} = props;
-    
+        eventDescChange,
+        chooseDate } = props;
+
     var event = {
         name: eventName,
         desc: eventDesc,
         datetime: datetime,
         categorySportId: categorySportId,
-        location:{
+        location: {
             address: location.address
         }
     };
-  switch (step) {
-    case 0:
-      return <SportList categorySports={categorySports} chooseSport={chooseSport}/>;
-    case 1:
-      return <EventNameForm
-      eventNameChange={eventNameChange} 
-      categorySportId={categorySportId} 
-      categorySports={categorySports}
-      eventName={eventName}
-       />;
-    case 2:
-      return <EventTimeForm datetime={datetime} chooseDate={chooseDate} />;
-    case 3:
-        return <Geo location={location} chooseAddress={chooseAddress} />;
-    case 4:
-        return <EventSummary event={event} categorySports={categorySports} eventDescChange={eventDescChange} />
-    default:
-      throw new Error('Unknown step');
-  }
+    switch (step) {
+        case 0:
+            return <SportList categorySports={categorySports} chooseSport={chooseSport} />;
+        case 1:
+            return <EventNameForm
+                eventNameChange={eventNameChange}
+                categorySportId={categorySportId}
+                categorySports={categorySports}
+                eventName={eventName}
+            />;
+        case 2:
+            return <EventTimeForm datetime={datetime} chooseDate={chooseDate} />;
+        case 3:
+            return <Geo location={location} chooseAddress={chooseAddress} />;
+        case 4:
+            return <EventSummary event={event} categorySports={categorySports} eventDescChange={eventDescChange} />
+        default:
+            throw new Error('Unknown step');
+    }
 }
 
 class CreateEventForm extends React.Component {
-  handleReset = () => {
-    this.setState({
-      activeStep: 0,
-    });
-  };
-
-  onClickCreateEventBtn = () =>{
-    const {
-        categorySportId, 
-        eventName, 
-        datetime,
-        location,
-        eventDesc,
-    } = this.props;
-    
-    var event = {
-        name: eventName,
-        desc: eventDesc,
-        datetime: datetime,
-        categorySportId: categorySportId,
-        location: location,
+    handleReset = () => {
+        this.setState({
+            activeStep: 0,
+        });
     };
 
-    this.props.createEvent(event);
-  }
-  render() {
-    const { classes, auth } = this.props;
-    const { activeStep } = this.props;
-    
-    if(!auth.uid) return <Redirect to='/login' />
+    onClickCreateEventBtn = () => {
+        const {
+            categorySportId,
+            eventName,
+            datetime,
+            location,
+            eventDesc,
+        } = this.props;
 
-    return (
-      <React.Fragment>
-        <main className={classes.layout}>
-          <Paper className={classes.paper}>
-            <Typography component="h1" variant="h5" align="center">
-              Создать событие
-            </Typography>
-            <Stepper activeStep={activeStep} alternativeLabel className={classes.stepper}>
-              {steps.map(label => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
+        var event = {
+            name: eventName,
+            desc: eventDesc,
+            datetime: datetime,
+            categorySportId: categorySportId,
+            location: location,
+        };
+
+        this.props.createEvent(event);
+    }
+    render() {
+        const { classes, auth } = this.props;
+        const { activeStep } = this.props;
+
+        if (!auth.uid) return <Redirect to='/login' />
+
+        return (
             <React.Fragment>
-              {activeStep === steps.length ? (
-                <CreateEventInfo createEventIsSuccess={this.props.createEventIsSuccess} />
-              ) : (
-                <React.Fragment>
-                  {getStepContent(activeStep, this.props)}
-                  <div className={classes.buttons}>
-                    {activeStep !== 0 && (
-                      <Button onClick={this.props.clickBackBtn} className={classes.button}>
-                        Назад
+                <main className={classes.layout}>
+                    <Paper className={classes.paper}>
+                        <Typography component="h1" variant="h5" align="center">
+                            Создать событие
+            </Typography>
+                        <Stepper activeStep={activeStep} alternativeLabel className={classes.stepper}>
+                            {steps.map(label => (
+                                <Step key={label}>
+                                    <StepLabel>{label}</StepLabel>
+                                </Step>
+                            ))}
+                        </Stepper>
+                        <React.Fragment>
+                            {activeStep === steps.length ? (
+                                <CreateEventInfo createEventIsSuccess={this.props.createEventIsSuccess} />
+                            ) : (
+                                    <React.Fragment>
+                                        {getStepContent(activeStep, this.props)}
+                                        <div className={classes.buttons}>
+                                            {activeStep !== 0 && (
+                                                <Button onClick={this.props.clickBackBtn} className={classes.button}>
+                                                    Назад
                       </Button>
-                    )}
-                    {
-                        activeStep === steps.length - 1 ? <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={this.onClickCreateEventBtn}
-                        className={classes.button}
-                      >Создать</Button> : <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={this.props.clickNextBtn}
-                                    className={classes.button}
-                                    >Далее</Button>
-                    }
-                  </div>
-                </React.Fragment>
-              )}
+                                            )}
+                                            {
+                                                activeStep === steps.length - 1 ? <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    onClick={this.onClickCreateEventBtn}
+                                                    className={classes.button}
+                                                >Создать</Button> : <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    onClick={this.props.clickNextBtn}
+                                                    className={classes.button}
+                                                >Далее</Button>
+                                            }
+                                        </div>
+                                    </React.Fragment>
+                                )}
+                        </React.Fragment>
+                    </Paper>
+                </main>
             </React.Fragment>
-          </Paper>
-        </main>
-      </React.Fragment>
-    );
-  }
+        );
+    }
 }
 
 CreateEventForm.propTypes = {
-  classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -212,8 +212,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) =>{
-    return{
+const mapDispatchToProps = (dispatch) => {
+    return {
         clickNextBtn: () => dispatch(clickNextBtn()),
         clickBackBtn: () => dispatch(clickBackBtn()),
         chooseSport: (categorySportId) => dispatch(chooseSport(categorySportId)),
@@ -229,6 +229,11 @@ export default compose(
     withStyles(styles),
     connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
-        { collection: 'categorySports'}
+        {
+            collection: 'categorySports',
+            orderBy: [
+                ['name', 'asc']
+            ]
+        }
     ])
 )(CreateEventForm)
