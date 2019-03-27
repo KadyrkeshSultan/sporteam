@@ -177,7 +177,7 @@ class CreateAreaForm extends React.Component {
                         color="primary"
                         onClick={this.onClickCreateEventBtn}
                         className={classes.button}
-                      >Создать</Button> : <Button
+                      >Добавить</Button> : <Button
                                     variant="contained"
                                     color="primary"
                                     onClick={this.props.clickNextBtn}
