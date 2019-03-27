@@ -8,6 +8,10 @@ import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
+import Info from '@material-ui/icons/InfoOutlined';
+import Phone from '@material-ui/icons/LocalPhoneOutlined';
+import QueryBuilder from '@material-ui/icons/QueryBuilderOutlined';
+import Monetization from '@material-ui/icons/MonetizationOnOutlined';
 
 const styles = theme => ({
   root: {
@@ -92,7 +96,7 @@ class AreaSummary extends React.Component {
             </Typography>
             <Grid container spacing={8} alignItems="flex-end">
                 <Grid item>
-                    <Icon className={'fa fa-clock'} />
+                    <QueryBuilder />
                 </Grid>
                 <Grid item xs>
                     <TextField id="input-with-icon-grid" label="Режим работы (пн-пт 08:00-21:00)" onChange={this.onAreaWorktimeChange} value={area.worktime} fullWidth />
@@ -100,7 +104,7 @@ class AreaSummary extends React.Component {
             </Grid>
             <Grid container spacing={8} alignItems="flex-end">
                 <Grid item>
-                    <Icon className={'fa fa-phone'} />
+                    <Phone />
                 </Grid>
                 <Grid item xs>
                     <TextField id="input-with-icon-grid" label="Контакты" onChange={this.onAreaContactsChange} value={area.contacts} fullWidth />
@@ -108,7 +112,7 @@ class AreaSummary extends React.Component {
             </Grid>
             <Grid container spacing={8} alignItems="flex-end">
                 <Grid item>
-                    <Icon className={'fas fa-tenge'} />
+                    <Monetization />
                 </Grid>
                 <Grid item xs>
                     <TextField id="input-with-icon-grid" label="Стоимость" onChange={this.onAreaPriceChange} value={area.price} fullWidth />
@@ -116,7 +120,7 @@ class AreaSummary extends React.Component {
             </Grid>
             <Grid container spacing={8} alignItems="flex-end">
                 <Grid item>
-                    <Icon className={'fas fa-info'} />
+                    <Info />
                 </Grid>
                 <Grid item xs>
                     <TextField id="input-with-icon-grid" label="Доп.информация" onChange={this.onAreaDescChange} value={area.description} fullWidth />
