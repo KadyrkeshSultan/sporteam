@@ -17,6 +17,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import EventDialog from './EventDialog';
+import FilterList from '@material-ui/icons/FilterList';
 
 const styles = theme => ({
   appBar: {
@@ -98,6 +99,7 @@ class EventList extends React.Component {
                   &nbsp;
                   <div>
                     <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                    <FilterList />
                       Фильтр
                 </Button>
                     <Dialog
