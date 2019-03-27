@@ -23,7 +23,8 @@ import {
     areaContactsChange,
     areaDescChange,
     areaPriceChange,
-    areaWorktimeChange
+    areaWorktimeChange,
+    createArea
 } from '../../../store/actions/areaActions';
 import { firestoreConnect } from 'react-redux-firebase';
 import AreaTypeList from './AreaTypeList';
@@ -139,6 +140,9 @@ class CreateAreaForm extends React.Component {
     });
   };
 
+  onClickCreateAreaBtn = () => {
+    this.props.createArea({});
+  }
   render() {
     const { classes, auth } = this.props;
     const { activeStep } = this.props;
@@ -161,7 +165,7 @@ class CreateAreaForm extends React.Component {
             </Stepper>
             <React.Fragment>
               {activeStep === steps.length ? (
-                <CreateAreaInfo createEventIsSuccess={false} />
+                <CreateAreaInfo createAreaIsSuccess={this.props.createAreaIsSuccess} />
               ) : (
                 <React.Fragment>
                   {getStepContent(activeStep, this.props)}
@@ -175,7 +179,7 @@ class CreateAreaForm extends React.Component {
                         activeStep === steps.length - 1 ? <Button
                         variant="contained"
                         color="primary"
-                        onClick={this.onClickCreateEventBtn}
+                        onClick={this.onClickCreateAreaBtn}
                         className={classes.button}
                       >Добавить</Button> : <Button
                                     variant="contained"
@@ -213,7 +217,8 @@ const mapStateToProps = (state) => {
         sportTypes: state.firestore.ordered.categorySports,
         location: state.area.location,
         areaTypes: state.firestore.ordered.sportgroundstype,
-        auth: state.firebase.auth
+        createAreaIsSuccess: state.area.createAreaIsSuccess,
+        auth: state.firebase.auth,
     }
 }
 
@@ -229,6 +234,7 @@ const mapDispatchToProps = (dispatch) =>{
         areaDescChange: (areaDesc) => dispatch(areaDescChange(areaDesc)),
         areaPriceChange: (areaPrice) => dispatch(areaPriceChange(areaPrice)),
         areaWorktimeChange: (areaWorktime) => dispatch(areaWorktimeChange(areaWorktime)),
+        createArea: (area) => dispatch(createArea(area))
     }
 }
 

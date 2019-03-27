@@ -8,6 +8,8 @@ export const AREA_DESC_CHANGE = 'AREA_DESC_CHANGE';
 export const AREA_CONTACTS_CHANGE = 'AREA_CONTACTS_CHANGE';
 export const AREA_WORKTIME_CHANGE = 'AREA_WORKTIME_CHANGE';
 export const AREA_PRICE_CHANGE = 'AREA_PRICE_CHANGE';
+export const CREATE_AREA_SUCCESS = 'CREATE_EVENT_SUCCESS';
+export const CREATE_AREA_ERROR = 'CREATE_EVENT_ERROR';
 
 const initState = {
     selectArea: {
@@ -83,6 +85,20 @@ const areaReducer = (state = initState, action) => {
                 ...state,
                 areaWorktime: action.payload
             }
+        case CREATE_AREA_SUCCESS:
+            console.log(CREATE_AREA_SUCCESS, action.payload);
+            return {
+                ...state,
+                activeStep: state.activeStep + 1,
+                createAreaIsSuccess: true
+            };
+        case CREATE_AREA_ERROR:
+            console.log(CREATE_AREA_ERROR, action.error);
+            return {
+                ...state,
+                activeStep: state.activeStep + 1,
+                createAreaIsSuccess: false
+            };
         default:
             return state;
     }
