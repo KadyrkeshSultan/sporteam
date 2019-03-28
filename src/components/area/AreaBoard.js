@@ -21,6 +21,7 @@ const styles = theme => ({
         },
     },
     
+    
 });
 
 class AreaBoard extends React.Component {
@@ -82,22 +83,43 @@ class AreaBoard extends React.Component {
                         </Typography>
                     </blockquote>
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={3}>
                 <Typography component="h4"><b>Режим работы</b></Typography><br/>
                 <Typography component="p" ><b> пн-сб</b> 06:30-23:30</Typography>
                 <Typography component="p" ><b> вс</b> выходной</Typography>  
                 <Typography component="p" ><b> перерыв</b> 12:00-14:00</Typography>
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={3}>
                 <Typography component="h4"><b>Характеристики</b></Typography><br/>
-                <Typography component="p" ><b> Размер</b> 60х30 м</Typography>
                 <Typography component="p" ><b> Тип</b> Крытая</Typography>  
-                <Typography component="p" ><b> Покрытие</b> лед(в зимнее время), прорезиненное покрытие</Typography>
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={3}>
                 <Typography component="h4"><b>Стоимость</b></Typography><br/>
                 <Typography component="p" > от 3000 тг/час</Typography>
                 
+                </Grid>
+                <Grid item xs={12} md={3}>
+                <Typography component="h4"><b>Контакты</b></Typography><br/>
+                <Typography component="p" > Иванов Иван Иванович</Typography>
+                
+                </Grid>
+                <Grid item xs={2} style={{textAlign:'center',letterSpacing:'40px'}}>
+                <i class="fas fa-lightbulb" style={{fontSize:'28px',color:'lightgreen'}}></i>
+                </Grid>
+                <Grid item xs={2} style={{textAlign:'center',letterSpacing:'40px'}}>
+                <i class="fas fa-wifi" style={{fontSize:'28px',color:'lightgreen'}}></i>
+                </Grid>
+                <Grid item xs={2} style={{textAlign:'center',letterSpacing:'40px'}}>
+                <i class="fas fa-coffee" style={{fontSize:'28px',color:'lightgreen'}}></i>
+                </Grid>
+                <Grid item xs={2} style={{textAlign:'center',letterSpacing:'40px'}}>
+                <i class="fas fa-car" style={{fontSize:'28px',color:'lightgreen'}}></i>
+                </Grid>
+                <Grid item xs={2} style={{textAlign:'center',letterSpacing:'40px'}}>
+                <i class="fas fa-medkit" style={{fontSize:'28px',color:'lightgreen'}}></i>
+                </Grid>
+                <Grid item xs={2} style={{textAlign:'center',letterSpacing:'40px'}}>
+                <i class="fas fa-shower" style={{fontSize:'28px',color:'lightgreen'}}></i>
                 </Grid>
                 
             </Grid>
