@@ -10,17 +10,31 @@ export const AREA_WORKTIME_CHANGE = 'AREA_WORKTIME_CHANGE';
 export const AREA_PRICE_CHANGE = 'AREA_PRICE_CHANGE';
 export const CREATE_AREA_SUCCESS = 'CREATE_EVENT_SUCCESS';
 export const CREATE_AREA_ERROR = 'CREATE_EVENT_ERROR';
+export const IMG_UPLOAD_START = 'IMG_UPLOAD_START';
+export const IMG_UPLOAD_ERROR = 'IMG_UPLOAD_ERROR';
+export const IMG_UPLOAD_SUCCESS = 'IMG_UPLOAD_SUCCESS';
+export const IMG_UPLOAD_PROGRESS = 'IMG_UPLOAD_PROGRESS';
+export const IMG_DELETE = 'IMG_DELETE';
+export const CREATE_AREA_VALIDATE_FAIL = 'CREATE_AREA_VALIDATE_FAIL';
+export const HIDE_ERROR_SNACKBAR = 'HIDE_ERROR_SNACKBAR';
 
 const initState = {
     selectArea: {
         id: null
     },
+    validateMsg: '',
     areaName: '',
     areaTypeId: null,
     areaPrice: '',
     areaDescription: '',
     areaContacts: '',
     areaWorktime: '',
+    areaImages: [],
+    upload:{
+        isUploading: false,
+        progress: 0,
+        error: ''
+    },
     areaSportTypes: [],
     activeStep: 0,
     createAreaIsSuccess: false,
@@ -90,7 +104,8 @@ const areaReducer = (state = initState, action) => {
             return {
                 ...state,
                 activeStep: state.activeStep + 1,
-                createAreaIsSuccess: true
+                createAreaIsSuccess: true,
+                validateMsg: ''
             };
         case CREATE_AREA_ERROR:
             console.log(CREATE_AREA_ERROR, action.error);
@@ -99,6 +114,69 @@ const areaReducer = (state = initState, action) => {
                 activeStep: state.activeStep + 1,
                 createAreaIsSuccess: false
             };
+        case IMG_UPLOAD_START:
+            console.log(IMG_UPLOAD_START);
+            return{
+                ...state,
+                upload: {
+                    isUploading: true,
+                    progress: 0,
+                    error: '',
+                }
+            }
+        case IMG_UPLOAD_PROGRESS:
+            console.log(IMG_UPLOAD_PROGRESS, action.payload);
+            return{
+                ...state,
+                upload: {
+                    ...state.upload,
+                    progress: action.payload,
+                    error: ''
+                }
+            }
+        case IMG_UPLOAD_ERROR:
+            console.log(IMG_UPLOAD_ERROR);
+            return{
+                ...state,
+                upload: {
+                    ...state.upload,
+                    isUploading: false,
+                    error: action.payload
+                }
+            }
+        case IMG_UPLOAD_SUCCESS:
+            console.log(IMG_UPLOAD_SUCCESS, action.payload);
+            return{
+                ...state,
+                upload: {
+                    ...state.upload,
+                    isUploading: false,
+                    error: '',
+                    progress: 100,
+                },
+                areaImages: action.payload
+            }
+        case IMG_DELETE:
+            console.log(IMG_DELETE, action.payload);
+            return{
+                ...state,
+                areaImages: action.payload
+            }
+        case CREATE_AREA_VALIDATE_FAIL:
+            console.log('validate fail');
+            return{
+                ...state,
+                validateMsg: action.payload
+            }
+        case HIDE_ERROR_SNACKBAR:
+            return{
+                ...state,
+                validateMsg: '',
+                upload:{
+                    ...state.upload,
+                    error: ''
+                }
+            }
         default:
             return state;
     }

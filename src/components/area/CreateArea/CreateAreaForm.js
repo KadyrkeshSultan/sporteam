@@ -89,12 +89,12 @@ function getStepContent(step, props) {
         areaDesc,
         areaPrice,
         areaContacts,
-        areaWorktime
+        areaWorktime,
+        validateMsg
     } = props;
 
     var area = {
         name: areaName,
-        //desc: eventDesc,
         areaTypeId: areaTypeId,
         areaSportTypes: areaSportTypes,
         worktime: areaWorktime,
@@ -127,6 +127,7 @@ function getStepContent(step, props) {
                 areaDescChange={areaDescChange}
                 areaPriceChange={areaPriceChange}
                 areaWorktimeChange={areaWorktimeChange}
+                validateMsg={validateMsg}
                 />
         default:
             throw new Error('Unknown step');
@@ -141,7 +142,7 @@ class CreateAreaForm extends React.Component {
   };
 
   onClickCreateAreaBtn = () => {
-    this.props.createArea({});
+    this.props.createArea();
   }
   render() {
     const { classes, auth } = this.props;
@@ -219,6 +220,7 @@ const mapStateToProps = (state) => {
         areaTypes: state.firestore.ordered.sportgroundstype,
         createAreaIsSuccess: state.area.createAreaIsSuccess,
         auth: state.firebase.auth,
+        validateMsg: state.area.validateMsg,
     }
 }
 
@@ -234,7 +236,7 @@ const mapDispatchToProps = (dispatch) =>{
         areaDescChange: (areaDesc) => dispatch(areaDescChange(areaDesc)),
         areaPriceChange: (areaPrice) => dispatch(areaPriceChange(areaPrice)),
         areaWorktimeChange: (areaWorktime) => dispatch(areaWorktimeChange(areaWorktime)),
-        createArea: (area) => dispatch(createArea(area))
+        createArea: () => dispatch(createArea())
     }
 }
 
