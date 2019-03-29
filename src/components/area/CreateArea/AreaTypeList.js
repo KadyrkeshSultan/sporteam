@@ -157,11 +157,11 @@ class AreaTypeList extends React.Component {
 
   render() {
     const { classes, areaTypes, areaTypeId } = this.props;
-    const types = areaTypes.map(areaType => ({
+    const types = areaTypes && areaTypes.map(areaType => ({
             value: areaType.id,
             label: areaType.name,
       }));
-    const areaType = types.find((item) => item.value == areaTypeId);
+    const areaType = types && types.find((item) => item.value == areaTypeId);
     const selectStyles = {
       input: base => ({
         ...base,

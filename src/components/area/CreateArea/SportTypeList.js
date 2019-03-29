@@ -182,11 +182,11 @@ class SportTypeList extends React.Component {
 
     render() {
         const { classes, areaSportTypes, sportTypes } = this.props;
-        const types = sportTypes.map(sportType => ({
+        const types = sportTypes && sportTypes.map(sportType => ({
             value: sportType.id,
             label: sportType.name,
         }));
-        const sports = types.filter((value) => areaSportTypes.find((item) => item.id == value.value) != undefined);
+        const sports = types && types.filter((value) => areaSportTypes.find((item) => item.id == value.value) != undefined);
         const selectStyles = {
             input: base => ({
                 ...base,
