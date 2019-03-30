@@ -24,6 +24,7 @@
     "react-scripts": "1.1.4",
     "react-select": "^2.4.2",
     "react-slick": "^0.23.2",
+    "react-yandex-maps": "^3.0.2",
     "redux": "^4.0.0",
     "redux-firestore": "^0.5.7",
     "redux-thunk": "^2.3.0",
