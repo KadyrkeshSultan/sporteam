@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import ErrorSnackbar from './ErrorSnackbar';
 
 const styles = theme => ({
   root: {
@@ -20,7 +22,7 @@ class EventSummary extends React.Component {
     }
   
   render(){
-    const { classes, event, categorySports } = this.props;
+    const { classes, event, categorySports, validateMsg } = this.props;
     const categorySport = categorySports && categorySports.find((item) => {return item.id === event.categorySportId});
 
     return (
@@ -64,6 +66,9 @@ class EventSummary extends React.Component {
                 Дополнительная информация
             </Typography>
             <TextField required id='eventDescription' label='Введите доп.информацию' onChange={this.onEventDescChange} value={event.desc} fullWidth/>
+            <Grid container spacing={8} alignItems="flex-end">
+                    { validateMsg != '' ? <ErrorSnackbar msg={validateMsg} /> : ''}
+            </Grid>
         </div>
     );
   }

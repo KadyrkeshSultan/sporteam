@@ -7,8 +7,16 @@ import { CHOOSE_SPORT,
     EVENT_DESC_CHANGE,
     CREATE_EVENT_SUCCESS,
     CREATE_EVENT_ERROR,
-    SELECT_EVENT
+    SELECT_EVENT,
+    HIDE_ERROR_SNACKBAR,
+    CREATE_EVENT_VALIDATE_FAIL
  } from '../reducers/eventReducer'
+
+export const hideSnackbar = () =>{
+    return(dispatch) => {
+        dispatch({type: HIDE_ERROR_SNACKBAR});
+    }
+}
 
 export const chooseSport = (categorySportId) => {
     return (dispatch, getState, {getFirebase, getFirestore}) =>{
@@ -37,6 +45,10 @@ export const createEvent = (event) =>{
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const userId = getState().firebase.auth.uid;
+        if (event.name == '' || event.datetime == null || event.location == null || event.categorySportId == ''){
+            dispatch({type: CREATE_EVENT_VALIDATE_FAIL, payload: 'Заполните все поля'});
+            return;
+        }
         firestore.collection('events').add({
             name: event.name,
             date: event.datetime,

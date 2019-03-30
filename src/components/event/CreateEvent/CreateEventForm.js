@@ -79,7 +79,9 @@ function getStepContent(step, props) {
         location,
         eventDesc,
         eventDescChange,
-        chooseDate } = props;
+        chooseDate,
+        validateMsg
+     } = props;
 
     var event = {
         name: eventName,
@@ -105,7 +107,7 @@ function getStepContent(step, props) {
         case 3:
             return <Geo location={location} chooseAddress={chooseAddress} />;
         case 4:
-            return <EventSummary event={event} categorySports={categorySports} eventDescChange={eventDescChange} />
+            return <EventSummary event={event} categorySports={categorySports} eventDescChange={eventDescChange} validateMsg={validateMsg}/>
         default:
             throw new Error('Unknown step');
     }
@@ -208,6 +210,7 @@ const mapStateToProps = (state) => {
         location: state.event.location,
         eventDesc: state.event.eventDesc,
         createEventIsSuccess: state.event.createEventIsSuccess,
+        validateMsg: state.event.validateMsg,
         auth: state.firebase.auth
     }
 }

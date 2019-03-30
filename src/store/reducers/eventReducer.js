@@ -8,11 +8,14 @@ export const CHOOSE_DATE = 'CHOOSE_DATE';
 export const CHOOSE_ADDRESS = 'CHOOSE_ADDRESS';
 export const EVENT_DESC_CHANGE = 'EVENT_DESC_CHANGE';
 export const SELECT_EVENT = 'SELECT_EVENT';
+export const HIDE_ERROR_SNACKBAR = 'HIDE_ERROR_SNACKBAR';
+export const CREATE_EVENT_VALIDATE_FAIL = 'CREATE_EVENT_VALIDATE_FAIL';
 
 const initState = {
     selectEvent: {
         id: null
     },
+    validateMsg: '',
     events : [],
     categorySportId: '1',
     activeStep: 0,
@@ -87,6 +90,16 @@ const eventReducer = (state = initState, action) => {
                 ...state,
                 selectEvent: action.payload
             };
+        case CREATE_EVENT_VALIDATE_FAIL:
+            return{
+                ...state,
+                validateMsg: action.payload
+            }
+        case HIDE_ERROR_SNACKBAR:
+            return{
+                ...state,
+                validateMsg: '',
+            }
         default:
             return state;
     }
