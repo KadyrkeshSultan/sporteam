@@ -17,6 +17,7 @@ export const IMG_UPLOAD_PROGRESS = 'IMG_UPLOAD_PROGRESS';
 export const IMG_DELETE = 'IMG_DELETE';
 export const CREATE_AREA_VALIDATE_FAIL = 'CREATE_AREA_VALIDATE_FAIL';
 export const HIDE_ERROR_SNACKBAR = 'HIDE_ERROR_SNACKBAR';
+export const SELECT_AREA = 'SELECT_AREA';
 
 const initState = {
     selectArea: {
@@ -176,6 +177,12 @@ const areaReducer = (state = initState, action) => {
                     ...state.upload,
                     error: ''
                 }
+            }
+        case SELECT_AREA:
+            console.log(SELECT_AREA, action.payload);
+            return{
+                ...state,
+                selectArea: action.payload
             }
         default:
             return state;

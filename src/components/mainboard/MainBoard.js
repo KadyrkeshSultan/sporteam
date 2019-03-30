@@ -46,7 +46,7 @@ const styles = theme => ({
 
 class MainBoard extends React.Component {
     render() {
-        const { classes, events } = this.props;
+        const { classes, events, areas } = this.props;
 
         return <React.Fragment>
             <CssBaseline />
@@ -54,7 +54,7 @@ class MainBoard extends React.Component {
             <div className={classNames(classes.layout, classes.cardGrid)}>
                 <CarouselMain />
                 <EventsGrid events={events} />
-                <AreaGrid />
+                <AreaGrid areas={areas}/>
                 <MapPlaces />
             </div>
         </React.Fragment>
@@ -70,6 +70,7 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         events: state.firestore.ordered.events,
+        areas: state.firestore.ordered.sportgrounds,
     }
 }
 
@@ -89,6 +90,12 @@ export default compose(
                 ['createdAt', 'desc']
             ],
             limit: 4
+        },
+        {
+            collection: 'sportgrounds',
+            orderBy: [
+                ['createdAt', 'desc']
+            ],
         }
     ])
 )(MainBoard);

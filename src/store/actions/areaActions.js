@@ -17,8 +17,25 @@ import {
     IMG_UPLOAD_SUCCESS,
     IMG_DELETE,
     CREATE_AREA_VALIDATE_FAIL,
-    HIDE_ERROR_SNACKBAR
+    HIDE_ERROR_SNACKBAR,
+    SELECT_AREA
 } from '../reducers/areaReducer'
+
+export const selectArea = (id) =>{
+    return (dispatch, getState, {getFirestore}) =>{
+        const firestore = getFirestore();
+        var docRef = firestore.collection('sportgrounds').doc(id);
+        docRef.get().then(function(doc){
+            if(doc.exists){
+                dispatch({type: SELECT_AREA, payload: {...doc.data(), id: id}});
+            }else{
+                dispatch({type: SELECT_AREA, payload: {id: null}});
+            }
+        }).catch(function(error){
+            dispatch({type: SELECT_AREA, payload: {id: null}});
+        })
+    }
+}
 
 export const hideSnackbar = () =>{
     return(dispatch) => {
