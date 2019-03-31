@@ -51,7 +51,7 @@ class MapPlaces extends React.Component {
             },
             properties: {
                 hintContent: `<strong>${area.location.address}</strong>`,
-                ballonContent: `<strong>${area.name}</strong>`
+                ballonContent: `<strong>${area.name}</strong><br/>${area.location.address}`
             }
         }));
         const pointsEvents = events && events.filter(event => event.location.latitude != '').map(event => ({
@@ -63,7 +63,7 @@ class MapPlaces extends React.Component {
             },
             properties: {
                 hintContent: `<strong>${event.location.address}</strong>`,
-                ballonContent: `<strong>${event.name}</strong>`
+                ballonContent: `<strong>${event.name}</strong><br />${event.location.address}`
             }
         }))
 
@@ -88,6 +88,7 @@ class MapPlaces extends React.Component {
                                     gridSize: 32,
                                 }}
                                 objects={{
+                                    openBalloonOnClick: true,
                                     preset: 'islands#greenDotIcon',
                                 }}
                                 clusters={{
@@ -112,6 +113,7 @@ class MapPlaces extends React.Component {
                                     gridSize: 32,
                                 }}
                                 objects={{
+                                    openBalloonOnClick: true,
                                     preset: 'islands#greenDotIcon',
                                 }}
                                 clusters={{
