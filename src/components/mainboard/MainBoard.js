@@ -55,7 +55,7 @@ class MainBoard extends React.Component {
                 <CarouselMain />
                 <EventsGrid events={events} />
                 <AreaGrid areas={areas}/>
-                <MapPlaces />
+                <MapPlaces areas={areas} events={events}/>
             </div>
         </React.Fragment>
     }
