@@ -59,7 +59,7 @@ class EventCard extends React.Component {
                             alt="Sport Calendar Image"
                         />
                         <div style={styles.overlay}>
-                            {moment(event.date.toDate()).locale('ru').format('lll')}
+                            {moment(event.date.toDate()).locale('ru').format('MMM Do, h:mm')}
                         </div>
                     </div>
                     <CardContent>
