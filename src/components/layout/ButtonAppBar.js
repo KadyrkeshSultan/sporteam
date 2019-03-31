@@ -42,11 +42,10 @@ function ButtonAppBar(props) {
             <MenuIcon />
           </IconButton> */}
           <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            SportApp
+            Спортивный календарь
           </Typography>
           <Button href='/'>Главная</Button>
-          <Button>Площадки</Button>
-          <Button>Новости</Button>
+          <Button href='/help'>Справка</Button>
           {
               authLinks
           }

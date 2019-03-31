@@ -30,7 +30,7 @@ class Footer extends React.Component{
         <Grid container spacing={32} justify="space-evenly">
             <Grid item xs >
                 <Typography variant='h6' color='textPrimary' gutterBottom>
-                    SportApp
+                    Спортивный календарь
                 </Typography>
                 <Typography variant='subtitle1' color='textSecondary'>
                     О нас
