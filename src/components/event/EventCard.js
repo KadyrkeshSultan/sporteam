@@ -10,8 +10,10 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 import 'moment/locale/ru';
-import {selectEvent} from '../../store/actions/eventActions';
-import {Redirect} from 'react-router';
+import { selectEvent } from '../../store/actions/eventActions';
+import { Redirect } from 'react-router';
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
 
 const styles = {
     card: {
@@ -31,9 +33,9 @@ class EventCard extends React.Component {
     state = {
         redirect: false
     }
-    handleCardClick = (e) =>{
+    handleCardClick = (e) => {
         this.props.selectEvent(e.currentTarget.id);
-        this.setState({redirect: true});
+        this.setState({ redirect: true });
     }
     render() {
         if (this.state.redirect) {
@@ -64,9 +66,14 @@ class EventCard extends React.Component {
                         <Typography variant="inherit" noWrap>
                             <b>{event.name}</b>
                         </Typography>
-                        <Typography component="p" variant="inherit" noWrap>
+
+                        <Grid container>
+                            <Avatar align='center' style={{ margin: '10', width: '16px', height: '16px' }} src={categorySport && categorySport.iconUrl}>
+
+                            </Avatar>
                             {categorySport == null ? "Спорт" : categorySport.name}
-                        </Typography>
+                        </Grid>
+
                         <Typography variant="inherit" noWrap>
                             <i className="fas fa-location-arrow"></i>{event.location.address}
                         </Typography>
