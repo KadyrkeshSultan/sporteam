@@ -135,7 +135,7 @@ const mapStateToProps = (state) => {
     return {
         area: state.area.selectArea,
         sportTypes: state.firestore.ordered.categorySports,
-        areaTypes: state.firestore.ordered.sporgroundstype
+        areaTypes: state.firestore.ordered.sportgroundstype
     }
 }
 export default compose(
