@@ -4,6 +4,7 @@ class YandexShare extends Component {
   componentDidMount() {
     var yaShare = this.refs.yaShare
     var url = window.location.href;
+    if (window.Ya != undefined){
         var share = window.Ya.share2(yaShare, {
             content: {
                 url: url,
@@ -16,6 +17,7 @@ class YandexShare extends Component {
                 size: 'm'
             }
         });
+    }
   }
 
   shouldComponentUpdate() {
