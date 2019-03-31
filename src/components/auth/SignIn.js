@@ -13,6 +13,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux'
 import { signIn } from '../../store/actions/authActions'
 import { compose } from 'redux'
+import {Redirect} from 'react-router-dom';
 
 const styles = theme => ({
   main: {
@@ -62,7 +63,9 @@ class SignIn extends Component {
     }
 
     render(){
-        const {classes, authError} = this.props;
+        
+        const {classes, authError, auth} = this.props;
+        if(auth.uid) return <Redirect to='/' />
         return (
         <main className={classes.main}>
             <CssBaseline />
@@ -112,7 +115,7 @@ SignIn.propTypes = {
 const mapStateToProps = (state) => {
     return{
       authError: state.auth.authError,
-      //auth: state.firebase.auth
+      auth: state.firebase.auth,
     }
   }
 
