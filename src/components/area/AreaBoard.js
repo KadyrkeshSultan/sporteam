@@ -38,10 +38,15 @@ class AreaBoard extends React.Component {
         const latitude = area.id && area.location.latitude;
         const longitude = area.id && area.location.longitude;
         const center = (latitude != null && latitude != '') ? [latitude, longitude] : [51.132435, 71.404126];
+        const hintContent = (latitude != null && latitude != '') ? area.location.address : 'Нет данных';
+        const ballonContent = (latitude != null && latitude != '') ? area.name : 'Нет данных';
         const location = {
             center: center,
+            hintContent: hintContent,
+            ballonContent: ballonContent,
             zoom: 16
         }
+        console.log('location', location);
         return <React.Fragment>
             <div className={classNames(classes.layout, classes.cardGrid)}>
                 <Grid container justify='space-between'>
@@ -119,6 +124,14 @@ class AreaBoard extends React.Component {
                                 type: 'Point',
                                 coordinates: location.center,
                             }}
+                            properties={{
+                                hintContent: location.hintContent,
+                                balloonContent: location.ballonContent
+                            }}
+                            modules={[
+                                'geoObject.addon.balloon',
+                                'geoObject.addon.hint',
+                            ]}
                         />
                     </Map>
                 </YMaps>
