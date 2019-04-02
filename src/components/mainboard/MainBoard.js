@@ -50,7 +50,7 @@ class MainBoard extends React.Component {
 
         return <React.Fragment>
             <CssBaseline />
-            {/* <Banner /> */}
+            <Banner />
             <div className={classNames(classes.layout, classes.cardGrid)}>
                 <CarouselMain />
                 <EventsGrid events={events} />
