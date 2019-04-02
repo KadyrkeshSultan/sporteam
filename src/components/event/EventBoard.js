@@ -53,6 +53,21 @@ const styles = theme => ({
         width: 20,
         height: 20,
     },
+    
+    [theme.breakpoints.down('sm')]: {
+        imageEvent: {
+            maxHeight: '300px',
+            overflow: 'hidden',
+            position: 'relative'
+        }
+    },
+    [theme.breakpoints.up('md')]: {
+        imageEvent: {
+            maxHeight: '390px',
+            overflow: 'hidden',
+            position: 'relative'
+        }
+    },
 });
 
 class EventBoard extends React.Component {
@@ -69,11 +84,7 @@ class EventBoard extends React.Component {
                     <Grid item xs={6}><h5 style={{ fontWeight: '400' }}>Вид спорта: {categorySport && categorySport.name}</h5></Grid>
                     {/* <Grid item xs={6}><h5 style={{ fontWeight: '400', textAlign: 'right' }}>Вы участник</h5></Grid> */}
                 </Grid>
-                <div style={{
-                    height: '300px',
-                    overflow: 'hidden',
-                    position: 'relative'
-                }}>
+                <div className={classes.imageEvent}>
                     <CardMedia
                         style={styles.media}
                         component="img"

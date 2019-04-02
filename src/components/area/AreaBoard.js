@@ -25,6 +25,18 @@ const styles = theme => ({
             marginRight: 'auto',
         },
     },
+    [theme.breakpoints.down('sm')]: {
+        imageArea: {
+            height: '300px',
+            objectFit: 'cover'
+        }
+    },
+    [theme.breakpoints.up('md')]: {
+        imageArea: {
+            height: '390px',
+            objectFit: 'cover'
+        }
+    },
 
 
 });
@@ -59,7 +71,7 @@ class AreaBoard extends React.Component {
                     {
                         area.id && area.images.map(item => {
                             return <div key={item.filename}>
-                                <img src={item.url} style={{ height: '300px', objectFit: 'cover' }} />
+                                <img src={item.url} className={classes.imageArea} />
                             </div>
                         })
                     }
