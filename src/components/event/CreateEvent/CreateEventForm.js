@@ -200,7 +200,6 @@ CreateEventForm.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         activeStep: state.event.activeStep,
         categorySports: state.firestore.ordered.categorySports,

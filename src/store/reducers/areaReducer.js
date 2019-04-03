@@ -97,7 +97,6 @@ const areaReducer = (state = initState, action) => {
                 areaWorktime: action.payload
             }
         case CREATE_AREA_SUCCESS:
-            console.log(CREATE_AREA_SUCCESS, action.payload);
             return {
                 ...state,
                 activeStep: state.activeStep + 1,
@@ -105,14 +104,12 @@ const areaReducer = (state = initState, action) => {
                 validateMsg: ''
             };
         case CREATE_AREA_ERROR:
-            console.log(CREATE_AREA_ERROR, action.error);
             return {
                 ...state,
                 activeStep: state.activeStep + 1,
                 createAreaIsSuccess: false
             };
         case IMG_UPLOAD_START:
-            console.log(IMG_UPLOAD_START);
             return{
                 ...state,
                 upload: {
@@ -122,7 +119,6 @@ const areaReducer = (state = initState, action) => {
                 }
             }
         case IMG_UPLOAD_PROGRESS:
-            console.log(IMG_UPLOAD_PROGRESS, action.payload);
             return{
                 ...state,
                 upload: {
@@ -132,7 +128,6 @@ const areaReducer = (state = initState, action) => {
                 }
             }
         case IMG_UPLOAD_ERROR:
-            console.log(IMG_UPLOAD_ERROR);
             return{
                 ...state,
                 upload: {
@@ -142,7 +137,6 @@ const areaReducer = (state = initState, action) => {
                 }
             }
         case IMG_UPLOAD_SUCCESS:
-            console.log(IMG_UPLOAD_SUCCESS, action.payload);
             return{
                 ...state,
                 upload: {
@@ -154,13 +148,11 @@ const areaReducer = (state = initState, action) => {
                 areaImages: action.payload
             }
         case IMG_DELETE:
-            console.log(IMG_DELETE, action.payload);
             return{
                 ...state,
                 areaImages: action.payload
             }
         case CREATE_AREA_VALIDATE_FAIL:
-            console.log('validate fail');
             return{
                 ...state,
                 validateMsg: action.payload

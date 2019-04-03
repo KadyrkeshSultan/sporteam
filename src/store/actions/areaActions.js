@@ -59,7 +59,6 @@ export const uploadSuccess = (filename) => {
 
 export const imageDelete = (filename) => {
     return (dispatch, getState, { getFirebase }) => {
-        console.log('file', filename);
         var images = getState().area.areaImages;
         images = images.filter((item) => item.filename !== filename);
         dispatch({ type: IMG_DELETE, payload: images });
@@ -91,21 +90,18 @@ export const chooseAreaSportTypes = (sportTypes) => {
 }
 
 export const clickNextBtn = () => {
-    console.log('next');
     return (dispatch, getState) => {
         dispatch({ type: CLICK_NEXT_BTN });
     }
 }
 
 export const clickBackBtn = () => {
-    console.log('back')
     return (dispatch, getState) => {
         dispatch({ type: CLICK_BACK_BTN });
     }
 }
 
 export const areaNameChange = (areaName) => {
-    console.log('areaNameChg -->', areaName);
     return (dispatch) => {
         dispatch({ type: AREA_NAME_CHANGE, payload: areaName });
     }
@@ -137,7 +133,6 @@ export const areaContactsChange = (areaContacts) => {
 
 export const createArea = () => {
     return (dispatch, getState, { getFirestore }) => {
-        console.log('create Area');
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const userId = getState().firebase.auth.uid;

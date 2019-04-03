@@ -53,7 +53,6 @@ class Banner extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("main", state);
     return {
         auth: state.firebase.auth,
         events: state.firestore.ordered.events,

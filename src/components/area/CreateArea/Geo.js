@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 class Geo extends React.Component {
   constructor(props) {
     super(props)
-    console.log(this.props);
     var coord = {
         lat: this.props.location.latitude,
         lng: this.props.location.longitude
@@ -27,7 +26,6 @@ class Geo extends React.Component {
     // Once a suggestion has been selected by your consumer you can use the utility geocoding
     // functions to get the latitude and longitude for the selected suggestion.
     geocodeBySuggestion(suggestion).then((results) => {
-        console.log(suggestion);
       if (results.length < 1) {
         this.setState({
           open: true,

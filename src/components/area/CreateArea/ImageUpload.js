@@ -127,7 +127,6 @@ class ImageUpload extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         //activeStep: state.area.activeStep,
         auth: state.firebase.auth,

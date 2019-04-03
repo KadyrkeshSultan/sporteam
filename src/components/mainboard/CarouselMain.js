@@ -47,7 +47,6 @@ class CarouselMain extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("main", state);
     return {
         news: state.firestore.ordered.news,
     }

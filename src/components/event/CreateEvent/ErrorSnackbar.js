@@ -99,7 +99,6 @@ class ErrorSnackbar extends React.Component {
 
     render() {
         const { classes, msg } = this.props;
-        console.log('render snack')
         const open = (msg != '') || (msg != null);
         return (
             <div>
@@ -124,7 +123,6 @@ class ErrorSnackbar extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         
     }

@@ -163,7 +163,6 @@ EventBoard.propTypes = {
 
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         event: state.firestore.ordered.event && state.firestore.ordered.event[0],
         categorySports: state.firestore.ordered.categorySports

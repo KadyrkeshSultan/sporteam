@@ -33,7 +33,6 @@ class ImageGrid extends React.Component {
 
     render() {
         const { classes, images } = this.props;
-        console.log('img', images);
         return (
             <div className={classes.root}>
                 <GridList cellHeight={180} className={classes.gridList}>
@@ -60,7 +59,6 @@ class ImageGrid extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('imagegrid', state);
     return {
         auth: state.firebase.auth,
         images: state.area.areaImages,

@@ -205,7 +205,6 @@ CreateAreaForm.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         activeStep: state.area.activeStep,
         areaName: state.area.areaName,

@@ -58,7 +58,6 @@ class AreaBoard extends React.Component {
             ballonContent: ballonContent,
             zoom: 16
         }
-        console.log('location', location);
         return <React.Fragment>
             <div className={classNames(classes.layout, classes.cardGrid)}>
                 <Grid container justify='space-between'>
@@ -156,7 +155,7 @@ AreaBoard.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
+
     return {
         area: state.firestore.ordered.area && state.firestore.ordered.area[0],
         sportTypes: state.firestore.ordered.categorySports,
