@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import moment from 'moment';
 import 'moment/locale/ru';
+import YandexShare from '../layout/YandexShare';
 
 const styles = theme => ({
     icon: {
@@ -80,8 +81,13 @@ class EventBoard extends React.Component {
         return <React.Fragment>
             <div className={classNames(classes.layout, classes.cardGrid)}>
                 <Grid container>
-                    <Grid item xs={12}><h2 style={{ fontWeight: '400' }}>{event.id && event.name}</h2></Grid>
-                    <Grid item xs={6}><h5 style={{ fontWeight: '400' }}>Вид спорта: {categorySport && categorySport.name}</h5></Grid>
+                    <Grid item xs={12} md={4}>
+                        <h2 style={{ fontWeight: '400' }}>{event.id && event.name}</h2>
+                        <h3><YandexShare /></h3>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <h3 style={{ fontWeight: '400' }}>Вид спорта: {categorySport && categorySport.name}</h3>
+                    </Grid>
                     {/* <Grid item xs={6}><h5 style={{ fontWeight: '400', textAlign: 'right' }}>Вы участник</h5></Grid> */}
                 </Grid>
                 <div className={classes.imageEvent}>
@@ -100,14 +106,8 @@ class EventBoard extends React.Component {
                         fontSize: 18,
                     }}>
                         <Grid container>
-                            <Grid item xs={6}><h5 style={{ fontWeight: '400' }}>{moment(event.id && event.date.toDate()).locale('ru').format('llll')}</h5></Grid>
-                            <Grid item xs={6}>
-                                <h5 style={{ fontWeight: '400', textAlign: 'right' }}>
-                                    <i className="fab fa-facebook-square" style={{ fontSize: '18px', color: 'white' }}>&nbsp;</i>
-                                    <i className="fab fa-instagram" style={{ fontSize: '18px', color: 'white' }}>&nbsp;</i>
-                                    <i className="fab fa-telegram-plane" style={{ fontSize: '18px', color: 'white' }}>&nbsp;</i>
-                                    <i className="fab fa-whatsapp-square" style={{ fontSize: '18px', color: 'white' }}>&nbsp;</i>
-                                </h5></Grid>
+                            <Grid item xs={6}><h3 style={{ fontWeight: '400' }}>{moment(event.id && event.date.toDate()).locale('ru').format('llll')}</h3></Grid>
+                            
                         </Grid>
                     </div>
                 </div>
