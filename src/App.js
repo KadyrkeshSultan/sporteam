@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Router } from 'react-router-dom'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
 import ButtonAppBar from './components/layout/ButtonAppBar'
@@ -13,11 +13,12 @@ import AreaBoard from './components/area/AreaBoard';
 import CreateAreaForm from './components/area/CreateArea/CreateAreaForm';
 import Dashboard2 from './components/dashboard/Dashboard'
 import Sandbox from './components/layout/Sandbox';
+import history from './components/layout/history';
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <div className="App">
           <ButtonAppBar />
           <Switch>
@@ -34,7 +35,7 @@ class App extends Component {
           </Switch>
           <Footer />
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

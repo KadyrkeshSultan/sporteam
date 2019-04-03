@@ -8,20 +8,13 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import {Redirect} from 'react-router-dom';
-import {selectArea} from '../../store/actions/areaActions';
+import {browserHistory} from 'react-router';
+import history from '../layout/history';
 class AreaCard extends React.Component {
-    state = {
-        redirect: false
-    }
     handleCardClick = (e) =>{
-        this.props.selectArea(e.currentTarget.id);
-        this.setState({redirect: true});
+        history.push('/areas/' + e.currentTarget.id);
     }
     render() {
-        if (this.state.redirect) {
-            return <Redirect push to="/areaboard" />;
-        }
-
         const { areaTypes } = this.props;
         const { id, name, location, images, type } = this.props.area;
         //const loaderPic = "https://thumbs.gfycat.com/ArcticWarmBettong-max-1mb.gif";
@@ -63,14 +56,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        selectArea: (id) => dispatch(selectArea(id))
-    }
-}
-
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps),
     firestoreConnect([
         { collection: 'categorySports' },
         { collection: 'sportgroundstype' }
