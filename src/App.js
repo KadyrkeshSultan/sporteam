@@ -13,7 +13,7 @@ import AreaBoard from './components/area/AreaBoard';
 import CreateAreaForm from './components/area/CreateArea/CreateAreaForm';
 import Dashboard2 from './components/dashboard/Dashboard'
 import Sandbox from './components/layout/Sandbox';
-
+import NotFoundPage from './components/layout/NotFoundPage';
 class App extends Component {
   render() {
     return (
@@ -31,6 +31,7 @@ class App extends Component {
             <Route path='/eventboard' component={EventBoard} />
             <Route path='/areaboard' component={AreaBoard} />
             <Route path='/sandbox' component={Sandbox} />
+            <Route path='/404' component={NotFoundPage}/>
           </Switch>
           <Footer />
         </div>
