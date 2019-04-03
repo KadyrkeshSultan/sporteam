@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         events: state.firestore.ordered.mainevents,
-        areas: state.firestore.ordered.sportgrounds,
+        areas: state.firestore.ordered.mainareas,
     }
 }
 
@@ -90,7 +90,8 @@ export default compose(
             orderBy: [
                 ['createdAt', 'desc']
             ],
-            limit: 4
+            limit: 4,
+            storeAs: 'mainareas'
         }
     ])
 )(MainBoard);
