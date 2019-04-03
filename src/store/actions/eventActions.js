@@ -7,7 +7,6 @@ import { CHOOSE_SPORT,
     EVENT_DESC_CHANGE,
     CREATE_EVENT_SUCCESS,
     CREATE_EVENT_ERROR,
-    SELECT_EVENT,
     HIDE_ERROR_SNACKBAR,
     CREATE_EVENT_VALIDATE_FAIL
  } from '../reducers/eventReducer'
@@ -21,22 +20,6 @@ export const hideSnackbar = () =>{
 export const chooseSport = (categorySportId) => {
     return (dispatch, getState, {getFirebase, getFirestore}) =>{
         dispatch({type: CHOOSE_SPORT, payload: categorySportId});
-    }
-}
-
-export const selectEvent = (id) =>{
-    return (dispatch, getState, {getFirestore}) =>{
-        const firestore = getFirestore();
-        var docRef = firestore.collection('events').doc(id);
-        docRef.get().then(function(doc){
-            if(doc.exists){
-                dispatch({type: SELECT_EVENT, payload: {...doc.data(), id: id}});
-            }else{
-                dispatch({type: SELECT_EVENT, payload: {id: null}});
-            }
-        }).catch(function(error){
-            dispatch({type: SELECT_EVENT, payload: {id: null}});
-        })
     }
 }
 
@@ -82,7 +65,6 @@ export const chooseAddress = (location) =>{
 }
 
 export const eventNameChange = (eventName) =>{
-    console.log('eventNameChg -->', eventName);
     return (dispatch) => {
         dispatch({type: EVENT_NAME_CHANGE, payload: eventName});
     }
@@ -95,14 +77,12 @@ export const eventDescChange = (eventDesc) =>{
 }
 
 export const clickNextBtn = () =>{
-    console.log('next');
     return (dispatch, getState) =>{
         dispatch({type: CLICK_NEXT_BTN});
     }
 }
 
 export const clickBackBtn = () =>{
-    console.log('back')
     return (dispatch, getState) =>{
         dispatch({type: CLICK_BACK_BTN});
     }

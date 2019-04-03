@@ -10,10 +10,9 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 import 'moment/locale/ru';
-import { selectEvent } from '../../store/actions/eventActions';
-import { Redirect } from 'react-router';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import history from '../layout/history';
 
 const styles = {
     card: {
@@ -30,17 +29,10 @@ const styles = {
     }
 }
 class EventCard extends React.Component {
-    state = {
-        redirect: false
-    }
     handleCardClick = (e) => {
-        this.props.selectEvent(e.currentTarget.id);
-        this.setState({ redirect: true });
+        history.push('/events/' + e.currentTarget.id);
     }
     render() {
-        if (this.state.redirect) {
-            return <Redirect push to="/eventboard" />;
-        }
         const { event, categorySports } = this.props;
         const loaderPic = "https://thumbs.gfycat.com/ArcticWarmBettong-max-1mb.gif";
         const categorySport = categorySports && categorySports.find((item) => { return item.id === event.categorySport.id })
@@ -90,14 +82,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        selectEvent: (id) => dispatch(selectEvent(id))
-    }
-}
-
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps),
     firestoreConnect([
         { collection: 'categorySports' }
     ])

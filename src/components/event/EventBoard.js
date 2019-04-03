@@ -164,7 +164,7 @@ EventBoard.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        event: state.firestore.ordered.event && state.firestore.ordered.event[0],
+        event: state.firestore.ordered.selectEvent && state.firestore.ordered.selectEvent[0],
         categorySports: state.firestore.ordered.categorySports
     }
 }
@@ -178,7 +178,7 @@ export default compose(
             {
                 collection: 'events',
                 doc: id,
-                storeAs: 'event'
+                storeAs: 'selectEvent'
             }
         ]
     })

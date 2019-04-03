@@ -7,14 +7,10 @@ export const EVENT_NAME_CHANGE = 'EVENT_NAME_CHANGE';
 export const CHOOSE_DATE = 'CHOOSE_DATE';
 export const CHOOSE_ADDRESS = 'CHOOSE_ADDRESS';
 export const EVENT_DESC_CHANGE = 'EVENT_DESC_CHANGE';
-export const SELECT_EVENT = 'SELECT_EVENT';
 export const HIDE_ERROR_SNACKBAR = 'HIDE_ERROR_SNACKBAR';
 export const CREATE_EVENT_VALIDATE_FAIL = 'CREATE_EVENT_VALIDATE_FAIL';
 
 const initState = {
-    selectEvent: {
-        id: null
-    },
     validateMsg: '',
     events : [],
     categorySportId: '1',
@@ -71,24 +67,16 @@ const eventReducer = (state = initState, action) => {
                 datetime: action.payload
             }
         case CREATE_EVENT_SUCCESS:
-            console.log(CREATE_EVENT_SUCCESS, action.payload);
             return {
                 ...state,
                 activeStep: state.activeStep + 1,
                 createEventIsSuccess: true
             };
         case CREATE_EVENT_ERROR:
-            console.log(CREATE_EVENT_ERROR, action.error);
             return {
                 ...state,
                 activeStep: state.activeStep + 1,
                 createEventIsSuccess: false
-            };
-        case SELECT_EVENT:
-            console.log(SELECT_EVENT, action.payload);
-            return{
-                ...state,
-                selectEvent: action.payload
             };
         case CREATE_EVENT_VALIDATE_FAIL:
             return{

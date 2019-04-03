@@ -47,13 +47,12 @@ const styles = theme => ({
 class MainBoard extends React.Component {
     render() {
         const { classes, events, areas } = this.props;
-
         return <React.Fragment>
             <CssBaseline />
             <Banner />
             <div className={classNames(classes.layout, classes.cardGrid)}>
                 <CarouselMain />
-                <EventsGrid events={events} />
+                <EventsGrid events={events}/>
                 <AreaGrid areas={areas}/>
                 <MapPlaces areas={areas} events={events}/>
             </div>
@@ -69,33 +68,29 @@ const mapStateToProps = (state) => {
     console.log("main", state);
     return {
         auth: state.firebase.auth,
-        events: state.firestore.ordered.events,
+        events: state.firestore.ordered.mainevents,
         areas: state.firestore.ordered.sportgrounds,
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-
     }
 }
 
 export default compose(
     withStyles(styles),
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps),
     firestoreConnect([
         {
             collection: 'events',
+            limit: 4,
             orderBy: [
                 ['createdAt', 'desc']
             ],
-            limit: 4
+            storeAs: 'mainevents'
         },
         {
             collection: 'sportgrounds',
             orderBy: [
                 ['createdAt', 'desc']
             ],
+            limit: 4
         }
     ])
 )(MainBoard);
