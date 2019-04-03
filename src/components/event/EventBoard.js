@@ -76,18 +76,17 @@ class EventBoard extends React.Component {
 
         const { classes, event, categorySports } = this.props;
         const templatePic = "https://img3.akspic.ru/image/20085-hokkej_na_ldu-hokkej-hokkejnaya_klyushka-hokkej_dzhersi-sportivnye_obekty-1920x1080.jpg?attachment=1";
-        const categorySport = event.id && (categorySports && categorySports.find((item) => { return item.id === event.categorySport.id }))
+        const categorySport = event && (categorySports && categorySports.find(item => item.id === event.categorySport.id))
 
         return <React.Fragment>
             <div className={classNames(classes.layout, classes.cardGrid)}>
                 <Grid container>
                     <Grid item xs={12} md={4}>
-                        <h2 style={{ fontWeight: '400' }}>{event.id && event.name}</h2>
+                        <h2 style={{ fontWeight: '400' }}>{event && event.name}</h2>
                         <h3><YandexShare /></h3>
-                    </Grid>
-                    <Grid item xs={12} md={4}>
                         <h3 style={{ fontWeight: '400' }}>Вид спорта: {categorySport && categorySport.name}</h3>
                     </Grid>
+                    
                     {/* <Grid item xs={6}><h5 style={{ fontWeight: '400', textAlign: 'right' }}>Вы участник</h5></Grid> */}
                 </Grid>
                 <div className={classes.imageEvent}>
@@ -106,7 +105,7 @@ class EventBoard extends React.Component {
                         fontSize: 18,
                     }}>
                         <Grid container>
-                            <Grid item xs={6}><h3 style={{ fontWeight: '400' }}>{moment(event.id && event.date.toDate()).locale('ru').format('llll')}</h3></Grid>
+                            <Grid item xs={6}><h3 style={{ fontWeight: '400' }}>{moment(event && event.date.toDate()).locale('ru').format('llll')}</h3></Grid>
                             
                         </Grid>
                     </div>
@@ -116,11 +115,11 @@ class EventBoard extends React.Component {
                         <h5 style={{ fontWeight: '400' }}>Организатор</h5>
                         <Card className={classes.card}>
                             {/* <CardMedia className={classes.cover} component="img" image={"https://2ch.hk/fag/thumb/5996336/15385501684090s.jpg"} />    */}
-                            <Avatar className={classes.bigAvatar}>{event.id && event.user.firstName[0] + event.user.lastName[0]}</Avatar>
+                            <Avatar className={classes.bigAvatar}>{event && event.user.firstName[0] + event.user.lastName[0]}</Avatar>
                             <div className={classes.details}>
                                 <CardContent className={classes.content}>
                                     {/* <Typography component="p" >{event.id && event.user}</Typography> */}
-                                    <Typography component="p" >{event.id && event.user.firstName + ' ' + event.user.lastName}</Typography>
+                                    <Typography component="p" >{event && event.user.firstName + ' ' + event.user.lastName}</Typography>
                                 </CardContent>
                             </div>
                         </Card>
@@ -133,7 +132,7 @@ class EventBoard extends React.Component {
                             <div className={classes.details}>
                                 <CardContent className={classes.content}>
                                     {/* <Typography component="p" >{event.id && event.address}</Typography> */}
-                                    <Typography component="p" ><i className="fas fa-location-arrow"></i>{event.id && event.location.address}</Typography>
+                                    <Typography component="p" ><i className="fas fa-location-arrow"></i>{event && event.location.address}</Typography>
                                     {/* <Typography component="p" ><i className="fas fa-subway"></i> Динамо</Typography> */}
                                     <Link href={"asdas"}>Показать на карте</Link>
                                 </CardContent>
@@ -146,7 +145,7 @@ class EventBoard extends React.Component {
                         <Card className={classes.card}>
                             <div className={classes.details}>
                                 <CardContent className={classes.content}>
-                                    <Typography component="p" >{event.id && event.description}</Typography>
+                                    <Typography component="p" >{event && event.description}</Typography>
                                     {/* <Typography component="p" ><i className="fas fa-users"></i> от 30 лет</Typography> */}
                                 </CardContent>
                             </div>
@@ -166,14 +165,22 @@ EventBoard.propTypes = {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        event: state.event.selectEvent,
+        event: state.firestore.ordered.event && state.firestore.ordered.event[0],
         categorySports: state.firestore.ordered.categorySports
     }
 }
 export default compose(
     withStyles(styles),
     connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'categorySports' }
-    ])
+    firestoreConnect(props =>{
+        const {id} = props.match.params;
+        return [
+            {collection: 'categorySports'},
+            {
+                collection: 'events',
+                doc: id,
+                storeAs: 'event'
+            }
+        ]
+    })
 )(EventBoard)

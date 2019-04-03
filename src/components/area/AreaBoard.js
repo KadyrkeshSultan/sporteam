@@ -45,10 +45,10 @@ class AreaBoard extends React.Component {
     render() {
 
         const { classes, theme, area, areaTypes, sportTypes } = this.props;
-        const areaType = area.id && (areaTypes && areaTypes.find(item => item.id == area.type.id));
-        const sports = area.id && (sportTypes && sportTypes.filter(item => area.sportTypes.find(i => i.id == item.id) != undefined));
-        const latitude = area.id && area.location.latitude;
-        const longitude = area.id && area.location.longitude;
+        const areaType = area && (areaTypes && areaTypes.find(item => item.id == area.type.id));
+        const sports = area && (sportTypes && sportTypes.filter(item => area.sportTypes.find(i => i.id == item.id) != undefined));
+        const latitude = area && area.location.latitude;
+        const longitude = area && area.location.longitude;
         const center = (latitude != null && latitude != '') ? [latitude, longitude] : [51.132435, 71.404126];
         const hintContent = (latitude != null && latitude != '') ? area.location.address : 'Нет данных';
         const ballonContent = (latitude != null && latitude != '') ? `<strong>${area.name}</strong><br/>${area.location.address}` : 'Нет данных';
@@ -63,13 +63,13 @@ class AreaBoard extends React.Component {
             <div className={classNames(classes.layout, classes.cardGrid)}>
                 <Grid container justify='space-between'>
                     <Grid item xs={12} sm={6}>
-                        <h2 style={{ fontWeight: '400' }}>{area.id && area.name}</h2>
+                        <h2 style={{ fontWeight: '400' }}>{area && area.name}</h2>
                         <h3><YandexShare /></h3>
                     </Grid>
                 </Grid>
                 <Carousel showArrows={true} autoPlay={true} showThumbs={false} dynamicHeight={false} useKeyboardArrows={true} swipeable={true} emulateTouch={true} showStatus={false}>
                     {
-                        area.id && area.images.map(item => {
+                        area && area.images.map(item => {
                             return <div key={item.filename}>
                                 <img src={item.url} className={classes.imageArea} />
                             </div>
@@ -79,18 +79,18 @@ class AreaBoard extends React.Component {
                 <br />
                 <Grid container spacing={24}>
                     <Grid item xs={12} md={6} style={{ paddingLeft: '30px' }}>
-                        <Typography component="p"><i className="fas fa-location-arrow"></i> {area.id && area.location.address}</Typography>
+                        <Typography component="p"><i className="fas fa-location-arrow"></i> {area && area.location.address}</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <blockquote>
                             <Typography component="p" align="justify">
-                                {area.id && area.description}
+                                {area && area.description}
                             </Typography>
                         </blockquote>
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Typography component="h4"><b>Режим работы</b></Typography><br />
-                        <Typography component="p" >{area.id && area.worktime}</Typography>
+                        <Typography component="p" >{area && area.worktime}</Typography>
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Typography component="h4"><b>Характеристики</b></Typography><br />
@@ -98,12 +98,12 @@ class AreaBoard extends React.Component {
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Typography component="h4"><b>Стоимость</b></Typography><br />
-                        <Typography component="p" > {area.id && area.price}</Typography>
+                        <Typography component="p" > {area && area.price}</Typography>
 
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Typography component="h4"><b>Контакты</b></Typography><br />
-                        <Typography component="p" > {area.id && area.contacts}</Typography>
+                        <Typography component="p" > {area && area.contacts}</Typography>
 
                     </Grid>
                     <Grid item xs={2} style={{ textAlign: 'center', letterSpacing: '40px' }}>
@@ -158,7 +158,7 @@ AreaBoard.propTypes = {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        area: state.area.selectArea,
+        area: state.firestore.ordered.area && state.firestore.ordered.area[0],
         sportTypes: state.firestore.ordered.categorySports,
         areaTypes: state.firestore.ordered.sportgroundstype
     }
@@ -166,8 +166,16 @@ const mapStateToProps = (state) => {
 export default compose(
     withStyles(styles),
     connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'categorySports' },
-        { collection: 'sportgroundstype' }
-    ])
+    firestoreConnect(props => {
+        const { id } = props.match.params;
+        return [
+            { collection: 'categorySports' },
+            { collection: 'sportgroundstype' },
+            {
+                collection: 'sportgrounds',
+                doc: id,
+                storeAs: 'area'
+            }
+        ]
+    })
 )(AreaBoard)

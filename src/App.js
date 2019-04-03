@@ -25,11 +25,11 @@ class App extends Component {
             <Route path='/login' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route exact path='/events' component={EventList} />
-            <Route path='/board' component={Dashboard2} />
             <Route path='/events/create' component={CreateEventForm} />
+            <Route path='/events/:id' component={EventBoard} />
             <Route path='/areas/create' component={CreateAreaForm} />
-            <Route path='/eventboard' component={EventBoard} />
-            <Route path='/areaboard' component={AreaBoard} />
+            <Route path='/areas/:id' component={AreaBoard} />
+            <Route path='/board' component={Dashboard2} />
             <Route path='/sandbox' component={Sandbox} />
           </Switch>
           <Footer />
