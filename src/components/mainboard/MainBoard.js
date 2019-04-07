@@ -7,7 +7,6 @@ import Banner from './Banner';
 import EventsGrid from '../event/EventsGrid';
 import AreaGrid from '../area/AreaGrid';
 import MapPlaces from './MapPlaces';
-import { Redirect } from 'react-router-dom'
 import CarouselMain from './CarouselMain';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -47,8 +46,7 @@ const styles = theme => ({
 
 class MainBoard extends React.Component {
     render() {
-        const { classes, events, areas, auth } = this.props;
-        if (!auth.uid) return <Redirect to='/login' />
+        const { classes, events, areas } = this.props;
 
         return <React.Fragment>
             <CssBaseline />
