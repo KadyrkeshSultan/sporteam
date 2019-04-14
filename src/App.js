@@ -15,6 +15,7 @@ import Dashboard2 from './components/dashboard/Dashboard'
 import Sandbox from './components/layout/Sandbox';
 import history from './components/layout/history';
 import NotFoundPage from './components/layout/NotFoundPage';
+import AreaList from './components/area/AreaList';
 class App extends Component {
   render() {
     return (
@@ -28,6 +29,7 @@ class App extends Component {
             <Route exact path='/events' component={EventList} />
             <Route path='/events/create' component={CreateEventForm} />
             <Route path='/events/:id' component={EventBoard} />
+            <Route exact path='/areas' component={AreaList} />
             <Route path='/areas/create' component={CreateAreaForm} />
             <Route path='/areas/:id' component={AreaBoard} />
             <Route path='/board' component={Dashboard2} />
