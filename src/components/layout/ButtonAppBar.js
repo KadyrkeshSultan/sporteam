@@ -6,66 +6,126 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {connect } from 'react-redux';
-import {compose} from 'redux';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import Button from '@material-ui/core/Button';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import { Link } from '@material-ui/core';
+import {signOut} from '../../store/actions/authActions'
 
 const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  appBar: {
-    
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  toolbarTitle: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
+    root: {
+        flexGrow: 1,
+    },
+    appBar: {
+
+    },
+    grow: {
+        flexGrow: 1,
+    },
+    toolbarTitle: {
+        flex: 1,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20,
+    },
 };
 
-function ButtonAppBar(props) {
-  const { classes, auth } = props;
-  const authLinks = !auth.uid ? <SignedOutLinks /> : <SignedInLinks />
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" color='default' className={classes.appBar}>
-        <Toolbar>
-          {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+class ButtonAppBar extends React.Component {
+    state = {
+        anchorEl: null
+    }
+
+    handleMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = () => {
+        this.setState({ anchorEl: null });
+    };
+
+    render() {
+        const { classes, auth, signOut } = this.props;
+        const { anchorEl } = this.state;
+        const open = Boolean(anchorEl);
+        return (
+            <div className={classes.root}>
+                <AppBar position="static" color='default' className={classes.appBar}>
+                    <Toolbar>
+                        {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            Спортивный календарь
+                        <Typography variant="h6" color="inherit" noWrap className={classes.grow}>
+                            Спортивный календарь
           </Typography>
-          <Button href='/'>Главная</Button>
-          <Button href='/help'>Справка</Button>
-          {
-              authLinks
-          }
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+                        <div>
+                            <IconButton
+                                aria-owns={open ? 'menu-appbar' : undefined}
+                                aria-haspopup="true"
+                                onClick={this.handleMenu}
+                                color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={open}
+                                onClose={this.handleClose}
+                            >
+                                <MenuItem component={'a'} href='/'>
+                                    Главная
+                                </MenuItem>
+                                <MenuItem component={'a'} href='/signup'>
+                                    Регистрация
+                                </MenuItem>
+                                {
+                                    !auth.uid ? <MenuItem component={'a'} href='/login'>
+                                        Вход
+                                </MenuItem> :
+                                        <MenuItem component={'a'} onClick={signOut()}>
+                                            Выйти
+                            </MenuItem>
+                                }
+                            </Menu>
+                        </div>
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
+    }
 }
 
 ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
-    return{
+    return {
         auth: state.firebase.auth
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        signOut: () => dispatch(signOut())
     }
 }
 
 export default compose(
     withStyles(styles),
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
 )(ButtonAppBar);
