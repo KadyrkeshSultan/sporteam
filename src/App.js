@@ -16,10 +16,12 @@ import Sandbox from './components/layout/Sandbox';
 import history from './components/layout/history';
 import NotFoundPage from './components/layout/NotFoundPage';
 import AreaList from './components/area/AreaList';
+import ScrollToTop from './components/layout/ScrollToTop';
 class App extends Component {
   render() {
     return (
       <Router history={history}>
+      <ScrollToTop>
         <div className="App">
           <ButtonAppBar />
           <Switch>
@@ -38,6 +40,7 @@ class App extends Component {
           </Switch>
           <Footer />
         </div>
+        </ScrollToTop>
       </Router>
     );
   }
