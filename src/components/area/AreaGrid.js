@@ -1,14 +1,13 @@
 import React from 'react';
 import AreaCard from './AreaCard';
-import { Grid } from '@material-ui/core';
+import { Grid, Link } from '@material-ui/core';
 
 class AreaGrid extends React.Component {
 
     render() {
         const { areas } = this.props;
         return <React.Fragment>
-            <h2 style={{ fontWeight: '400' }}>ПОПУЛЯРНЫЕ ПЛОЩАДКИ</h2>
-
+            <h2 style={{ fontWeight: '400' }}>ПОПУЛЯРНЫЕ ПЛОЩАДКИ <Link component={'a'} href='/events'>Все &rarr;</Link> </h2>
             <Grid container spacing={24}>
                 {
                     areas && areas.map((item) => {
