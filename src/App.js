@@ -17,6 +17,8 @@ import history from './components/layout/history';
 import NotFoundPage from './components/layout/NotFoundPage';
 import AreaList from './components/area/AreaList';
 import ScrollToTop from './components/layout/ScrollToTop';
+import NewsBoard from './components/news/NewsBoard'
+import NewsList from './components/news/NewsList'
 class App extends Component {
   render() {
     return (
@@ -37,6 +39,8 @@ class App extends Component {
             <Route path='/board' component={Dashboard2} />
             <Route path='/sandbox' component={Sandbox} />
             <Route path='/404' component={NotFoundPage}/>
+            <Route path='/news/:id' component={NewsBoard}/>
+            <Route exact path='/news' component={NewsList}/>
           </Switch>
           <Footer />
         </div>
