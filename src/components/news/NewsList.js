@@ -14,6 +14,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import EventDialog from '../event/EventDialog';
 import FilterList from '@material-ui/icons/FilterList';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 
 const styles = theme => ({
   appBar: {
@@ -66,7 +69,7 @@ class NewsList extends React.Component {
   };
 
   render() {
-    const { classes, events } = this.props;
+    const { classes, news } = this.props;
     return (
       <React.Fragment>
         <main>
@@ -77,52 +80,27 @@ class NewsList extends React.Component {
                 Все новости
             </Typography>
               <Typography variant="h6" align="center" color="textSecondary" paragraph>
-                Узнавайте последние новости или создайте новость
+                Узнавайте последние новости
             </Typography>
-              <div className={classes.heroButtons}>
+              {/* <div className={classes.heroButtons}>
                 <Grid container justify="center">
                   <Button variant="outlined" color="default" component={Link} to="/events/create">
                     Добавить новость
                   </Button>
-                  &nbsp;
-                  <div>
-                    <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                    <FilterList />
-                      Фильтр
-                </Button>
-                    <Dialog
-                      open={this.state.open}
-                      onClose={this.handleClose}
-                      fullWidth={true}
-                      maxWidth={'sm'}
-                      aria-labelledby="form-dialog-title"
-                    >
-                      <DialogTitle id="form-dialog-title">Фильтр</DialogTitle>
-                      <DialogContent>
-                      <EventDialog/>
-                      </DialogContent>
-                      <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                          Отмена
-            </Button>
-                        <Button onClick={this.handleClose} color="primary">
-                          Применить
-            </Button>
-                      </DialogActions>
-                    </Dialog>
-                  </div>
                 </Grid>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className={classNames(classes.layout, classes.cardGrid)}>
             {/* End hero unit */}
             <Grid container spacing={24}>
-              
-                <Grid item sm={12} md={6} lg={4} style={{ width: '100%' }} >
-                  <NewsCard  />
-                </Grid>
-              
+                  {
+                      news && news.map(n => (
+                        <Grid key={n.id} item sm={12} md={6} lg={4} style={{ width: '100%' }} >
+                          <NewsCard news={n} />
+                        </Grid>
+                      ))
+                  }
             </Grid>
           </div>
         </main>
@@ -132,8 +110,21 @@ class NewsList extends React.Component {
   }
 }
 
-NewsList.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+const mapStateToProps = (state) => {
+    return {
+        news: state.firestore.ordered.news,
+    }
+}
 
-export default withStyles(styles)(NewsList)
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps),
+    firestoreConnect([
+        { 
+            collection: 'news',
+            orderBy: [
+                ['datepublish', 'desc']
+            ],
+        },
+    ])
+)(NewsList)

@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { firestoreConnect } from 'react-redux-firebase';
+import history from '../layout/history';
 
 const styles = theme =>({
     titleNews:{
@@ -25,6 +26,9 @@ const styles = theme =>({
     },
 })
 class CarouselMain extends Component {
+    handleNewsClick = (e) => {
+        history.push('/news/' + e.currentTarget.id);
+    }
   render() {
       const {news, classes} = this.props;
     return (
@@ -34,7 +38,7 @@ class CarouselMain extends Component {
         <Carousel showArrows={true} autoPlay={true} showThumbs={false} dynamicHeight={false} useKeyboardArrows={true} swipeable={true} emulateTouch={true} showStatus={false} infiniteLoop>
         {
             news && news.map(item =>{
-                return <div key={item.id}>
+                return <div key={item.id} id={item.id} onClick={this.handleNewsClick}>
                     <img src={item.images[0]} className={classes.imageNews} />
                     <p className='legend' style={{backgroundColor: '#0000', fontSize: 'larger'}}>{item.title}</p>
                 </div>

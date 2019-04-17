@@ -75,16 +75,15 @@ const styles = theme => ({
 class NewsBoard extends React.Component {
     render() {
 
-        const { classes, event, categorySports } = this.props;
-        const templatePic = "https://sputniknews.kz/images/552/34/5523465.jpg";
-        const categorySport = event && (categorySports && categorySports.find(item => item.id === event.categorySport.id))
+        const { classes, news } = this.props;
+        const templatePic = "https://thumbs.gfycat.com/ArcticWarmBettong-max-1mb.gif";
 
         return <React.Fragment> 
             <div className={classNames(classes.layout, classes.cardGrid)}>
                 <Grid container>
                     <Grid item xs={12}><br/>
-                            <Typography variant="h5" component="h3" style ={{textAlign:'justify'}}>
-                            Казахстанец встретится на ринге Madison Square Garden 8 июня со Стивом Роллсом
+                            <Typography variant="h6" component="h5" style ={{textAlign:'justify'}}>
+                                {news && news.title}
                             </Typography>
                         <h3><YandexShare /></h3>
                         
@@ -100,7 +99,7 @@ class NewsBoard extends React.Component {
                         component="img"
                         alt="Contemplative Reptile"
                         // image={categorySport == null ? templatePic : categorySport.pictureUrl}
-                        image={'https://sputniknews.kz/images/552/34/5523465.jpg'} />
+                        image={news == null ? templatePic : news.images[0]} />
                     <div style={{
                         width: '92%',
                         position: 'absolute',
@@ -110,7 +109,7 @@ class NewsBoard extends React.Component {
                         textShadow: "1px 1px 1px black",
                         fontSize: 18,
                     }}>
-                            <h3 style={{ fontWeight: '400' }}>Официально объявлен новый соперник Головкина</h3>
+                            <h3 style={{ fontWeight: '400' }}>{moment(news && news.datepublish.toDate()).locale('ru').format('llll')}</h3>
                     </div>
                 </div>
                 </Grid>
@@ -121,25 +120,13 @@ class NewsBoard extends React.Component {
                     </Grid> 
                     <Grid item xs={12} md={8}>
 
-                    <Typography content="p">{moment(event && event.date.toDate()).locale('ru').format('llll')}</Typography>
+                    <Typography content="p"></Typography>
                         <Paper className={classes.root} elevation={1}>
                             
                             <Typography component="p" style ={{textAlign:'justify',padding:'20px'}}>
-                            Стриминговая платформа DAZN официально анонсировала бой казахстанского боксера, экс-чемпиона мира в среднем весе Геннадия Головкина.
-
-Поединок состоится 8 июня в Нью-Йорке (США), на арене Madison Square Garden, сообщает Sports.kz. Головкин встретится на ринге с 35-летним боксером из Канады Стивом Роллсом (19-0, 10 КО). 
-
-
-​Стоит отметить, что этот бой пройдет в промежуточном весе — 164 фунта. Ранее Головкин дрался исключительно в лимите в 160 фунтов.
-
-​Напомним, казахстанский боксер 15 сентября 2018 года потерпел первое поражение в профессиональной карьере — он уступил во втором поединке Саулю "Канело" Альваресу (51-1-2, 34 КО) решением большинства судей.
-
-Тест для фанатов Головкина: что вы не знаете о казахстанском боксере
-
-В случае, если Головкин побьет Роллса, а "Канело" 4 мая окажется сильнее Дэниэла Джейкобса (35-2, 29 КО), в сентябре пройдет третий бой GGG и Альвареса.
-
-Головкин вошел в число ста самых популярных спортсменов мира
-
+                            {
+                                news && news.text
+                            }
                             </Typography>
                         </Paper>
                     </Grid>
@@ -155,8 +142,7 @@ NewsBoard.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        event: state.firestore.ordered.selectEvent && state.firestore.ordered.selectEvent[0],
-        categorySports: state.firestore.ordered.categorySports
+        news: state.firestore.ordered.selectNews && state.firestore.ordered.selectNews[0],        
     }
 }
 export default compose(
@@ -165,11 +151,10 @@ export default compose(
     firestoreConnect(props =>{
         const {id} = props.match.params;
         return [
-            {collection: 'categorySports'},
             {
-                collection: 'events',
+                collection: 'news',
                 doc: id,
-                storeAs: 'selectEvent'
+                storeAs: 'selectNews'
             }
         ]
     })
