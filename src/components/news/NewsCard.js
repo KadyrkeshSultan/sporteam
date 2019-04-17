@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 import 'moment/locale/ru';
+import history from '../layout/history';
 
 const styles = {
     card: {
@@ -23,31 +24,33 @@ const styles = {
     }
 }
 class NewsCard extends React.Component {
+    handleCardClick = (e) => {
+        history.push('/news/' + e.currentTarget.id);
+    }
     render() {
-        const { event, categorySports } = this.props;
+        const { news } = this.props;
         const loaderPic = "https://thumbs.gfycat.com/ArcticWarmBettong-max-1mb.gif";
-        const categorySport = categorySports && categorySports.find((item) => { return item.id === event.categorySport.id })
 
         return ( 
             <Card style={styles.card}>
-                <CardActionArea>
+                <CardActionArea id={news && news.id} onClick={this.handleCardClick}>
                     <div style={{
                         height: '200px',
                         overflow: 'hidden',
                     }}>
                         <CardMedia
                             style={styles.media}
-                            image={'https://sputniknews.kz/images/552/34/5523465.jpg'}
+                            image={news == null ? loaderPic : news.images[0]}
                             component="img"
                             alt="Sport Calendar Image"
                         />
                     </div>
                     <CardContent>
                         <Typography variant="inherit" noWrap>
-                            <b>Казахстанец встретится на ринге Madison Square Garden 8 июня со Стивом Роллсом</b>
+                            <b>{news && news.title}</b>
                         </Typography>
                         <Typography variant="inherit" noWrap>
-                            24 april
+                            { news && moment(news.datepublish.toDate()).locale('ru').format('MMM Do, h:mm')}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
