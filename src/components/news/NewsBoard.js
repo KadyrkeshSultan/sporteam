@@ -79,7 +79,7 @@ class NewsBoard extends React.Component {
         const templatePic = "https://sputniknews.kz/images/552/34/5523465.jpg";
         const categorySport = event && (categorySports && categorySports.find(item => item.id === event.categorySport.id))
 
-        return <React.Fragment>
+        return <React.Fragment> 
             <div className={classNames(classes.layout, classes.cardGrid)}>
                 <Grid container>
                     <Grid item xs={12}><br/>

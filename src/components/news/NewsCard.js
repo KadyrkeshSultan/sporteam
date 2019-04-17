@@ -28,7 +28,7 @@ class NewsCard extends React.Component {
         const loaderPic = "https://thumbs.gfycat.com/ArcticWarmBettong-max-1mb.gif";
         const categorySport = categorySports && categorySports.find((item) => { return item.id === event.categorySport.id })
 
-        return (
+        return ( 
             <Card style={styles.card}>
                 <CardActionArea>
                     <div style={{

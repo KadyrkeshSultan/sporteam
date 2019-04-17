@@ -40,7 +40,7 @@ class App extends Component {
             <Route path='/sandbox' component={Sandbox} />
             <Route path='/404' component={NotFoundPage}/>
             <Route path='/news/:id' component={NewsBoard}/>
-            <Route exact path='/news' component={NewsList}/>
+            <Route exact path='/news' component={NewsList}/> 
           </Switch>
           <Footer />
         </div>

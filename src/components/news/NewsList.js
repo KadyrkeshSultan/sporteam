@@ -61,7 +61,7 @@ const styles = theme => ({
 });
 
 class NewsList extends React.Component {
-  state = {
+  state = { 
     open: false,
   };
 
