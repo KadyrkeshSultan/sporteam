@@ -1,23 +1,13 @@
 import React from 'react';
 import AreaCard from './AreaCard';
-import { Grid } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-
-const styles = theme => ({
-    button: {
-      margin: theme.spacing.unit,
-    },
-    input: {
-      display: 'none',
-    },
-  });
+import { Grid, Link } from '@material-ui/core';
 
 class AreaGrid extends React.Component {
 
     render() {
         const { areas } = this.props;
         return <React.Fragment>
+            <h2 style={{ fontWeight: '400' }}>ПОПУЛЯРНЫЕ ПЛОЩАДКИ <Link component={'a'} href='/events'>Все &rarr;</Link> </h2>
             <Grid container spacing={24}>
             <Grid item xs={12} md={6}>
                     <h2 style={{ fontWeight: '300',marginBlockEnd: 0 }}>ПОПУЛЯРНЫЕ ПЛОЩАДКИ</h2>
