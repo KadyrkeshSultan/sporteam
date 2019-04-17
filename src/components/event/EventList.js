@@ -157,6 +157,11 @@ export default compose(
   withStyles(styles),
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'events' },
+    { 
+        collection: 'events',
+        orderBy: [
+            ['createdAt', 'desc']
+        ],
+    },
   ])
 )(EventList)

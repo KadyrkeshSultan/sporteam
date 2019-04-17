@@ -149,6 +149,11 @@ export default compose(
   withStyles(styles),
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'sportgrounds' },
+    { 
+        collection: 'sportgrounds',
+        orderBy: [
+            ['createdAt', 'desc']
+        ],
+    },
   ])
 )(AreaList)
