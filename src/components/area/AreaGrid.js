@@ -1,7 +1,8 @@
 import React from 'react';
 import AreaCard from './AreaCard';
 import { Grid, Link } from '@material-ui/core';
-
+import Button from '@material-ui/core/Button'
+import { withStyles } from '@material-ui/core/styles';
 class AreaGrid extends React.Component {
 
     render() {
@@ -31,4 +32,4 @@ class AreaGrid extends React.Component {
         </React.Fragment>
     }
 }
-export default withStyles(styles)(AreaGrid);
+export default (AreaGrid);
