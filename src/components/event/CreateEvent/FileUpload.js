@@ -16,7 +16,7 @@ import {
     fileUploadProgress,
     fileUploadStart,
     fileUploadSuccess,
-} from '../../../store/actions/areaActions';
+} from '../../../store/actions/eventActions';
 import ErrorSnackbar from "./ErrorSnackbar";
 import { Grid } from "@material-ui/core";
 import List from '@material-ui/core/List';
