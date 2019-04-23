@@ -49,6 +49,10 @@ class ButtonAppBar extends React.Component {
         this.setState({ anchorEl: null });
     };
 
+    handleSignOut = () =>{
+        this.props.signOut();
+    }
+
     render() {
         const { classes, auth, signOut } = this.props;
         const { anchorEl } = this.state;
@@ -96,7 +100,7 @@ class ButtonAppBar extends React.Component {
                                     !auth.uid ? <MenuItem component={'a'} href='/login'>
                                         Вход
                                 </MenuItem> :
-                                        <MenuItem component={'a'} onClick={signOut()}>
+                                        <MenuItem onClick={this.handleSignOut}>
                                             Выйти
                             </MenuItem>
                                 }
