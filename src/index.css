@@ -37,3 +37,4 @@ body {
     padding: 12px;
     border-radius: 0 0 2px 2px;
 }
+img[alt=Man] { width: 100%; max-width: 640px;}

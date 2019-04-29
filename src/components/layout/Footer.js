@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import classNames from 'classnames';
+import Link from '@material-ui/core/Link';
 
 const styles = theme => ({
     footer: {
@@ -33,10 +34,14 @@ class Footer extends React.Component{
                     Спортивный календарь
                 </Typography>
                 <Typography variant='subtitle1' color='textSecondary'>
-                    О нас
+                    <Link href="/about" color="inherit">
+                        О нас
+                    </Link>
                 </Typography>
                 <Typography variant='subtitle1' color='textSecondary'>
-                    О проекте
+                    <Link href="/" color="inherit">
+                        О проекте
+                    </Link>
                 </Typography>
             </Grid>
             <Grid item xs >

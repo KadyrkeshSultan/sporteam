@@ -20,6 +20,9 @@ import ScrollToTop from './components/layout/ScrollToTop';
 import NewsBoard from './components/news/NewsBoard'
 import NewsList from './components/news/NewsList'
 import User from './components/user/User'
+import Feedback from './components/about/Feedback';
+import About from './components/about/About'
+import Settings from './components/about/Settings'
 
 class App extends Component {
   render() {
@@ -44,6 +47,9 @@ class App extends Component {
             <Route path='/news/:id' component={NewsBoard}/>
             <Route exact path='/news' component={NewsList}/> 
             <Route path='/user' component={User}/>
+            <Route path="/feedback" component={Feedback} />
+            <Route path='/about' component={About}/>
+            <Route path='/settings' component={Settings}/>
           </Switch>
           <Footer />
         </div>
