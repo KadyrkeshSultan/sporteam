@@ -19,6 +19,8 @@ import AreaList from './components/area/AreaList';
 import ScrollToTop from './components/layout/ScrollToTop';
 import NewsBoard from './components/news/NewsBoard'
 import NewsList from './components/news/NewsList'
+import User from './components/user/User'
+
 class App extends Component {
   render() {
     return (
@@ -41,6 +43,7 @@ class App extends Component {
             <Route path='/404' component={NotFoundPage}/>
             <Route path='/news/:id' component={NewsBoard}/>
             <Route exact path='/news' component={NewsList}/> 
+            <Route path='/user' component={User}/>
           </Switch>
           <Footer />
         </div>

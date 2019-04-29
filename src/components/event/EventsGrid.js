@@ -1,7 +1,8 @@
 import React from 'react';
 import EventCard from './EventCard';
 import { Grid, Link } from '@material-ui/core';
-
+import Button from '@material-ui/core/Button'
+import { withStyles } from '@material-ui/core/styles';
 class EventsGrid extends React.Component {
     render() {
         const { events } = this.props;
