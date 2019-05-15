@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
@@ -199,10 +198,6 @@ class CreateAreaForm extends React.Component {
     );
   }
 }
-
-CreateAreaForm.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 const mapStateToProps = (state) => {
     return {

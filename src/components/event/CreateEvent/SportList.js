@@ -8,10 +8,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-// import { compose} from 'redux'
-// import { connect } from 'react-redux';
-// import { firestoreConnect } from 'react-redux-firebase';
-// import { chooseSport } from '../../../store/actions/eventActions';
 
 const styles = theme => ({
   root: {
