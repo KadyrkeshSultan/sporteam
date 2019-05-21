@@ -20,7 +20,7 @@ const insideStyles = {
 
 
 };
-const image1 = "https://www.socialseo.com/wp-content/uploads/2018/10/iStock-826240410.jpg";
+const image1 = "./img/back.jpg";
 
 class Banner extends React.Component {
   render() {
