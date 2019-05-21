@@ -11,6 +11,7 @@ import CarouselMain from './CarouselMain';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import Mockup from './Mockup';
 
 const styles = theme => ({
     icon: {
@@ -40,6 +41,7 @@ class MainBoard extends React.Component {
                 <EventsGrid events={events}/>
                 <AreaGrid areas={areas}/>
                 <MapPlaces areas={areas} events={events}/>
+                <Mockup />
             </div>
         </React.Fragment>
     }
