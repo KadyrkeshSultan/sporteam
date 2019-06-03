@@ -14,13 +14,21 @@ export const FILE_UPLOAD_ERROR = 'FILE_UPLOAD_ERROR';
 export const FILE_UPLOAD_SUCCESS = 'FILE_UPLOAD_SUCCESS';
 export const FILE_UPLOAD_PROGRESS = 'FILE_UPLOAD_PROGRESS';
 export const FILE_DELETE = 'FILE_DELETE';
+export const CHOOSE_EVENTLIST_DATE = 'CHOOSE_EVENTLIST_DATE';
+export const SELECT_FILTER_CITY = 'SELECT_FILTER_CITY';
+export const SELECT_FILTER_SPORTS = 'SELECT_FILTER_SPORTS';
+export const APPLY_FILTER_EVENTS = 'APPLY_FILTER_EVENTS';
 
 const initState = {
     validateMsg: '',
     events : [],
+    filterEvents: [],
+    isFilterApply: false,
     categorySportId: '1',
     activeStep: 0,
     eventName: '',
+    filterCity: null,
+    filterSports: null,
     datetime: new Date(),
     eventDesc: '',
     createEventIsSuccess: false,
@@ -142,6 +150,22 @@ const eventReducer = (state = initState, action) => {
             return{
                 ...state,
                 eventFiles: action.payload
+            }
+        case SELECT_FILTER_CITY:
+            return{
+                ...state,
+                filterCity: action.payload
+            }
+        case SELECT_FILTER_SPORTS:
+            return{
+                ...state,
+                filterSports: action.payload
+            }
+        case APPLY_FILTER_EVENTS:
+            return{
+                ...state,
+                filterEvents: action.payload,
+                isFilterApply: action.isFilterApply,
             }
         default:
             return state;

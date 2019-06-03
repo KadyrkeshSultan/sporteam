@@ -13,7 +13,11 @@ import { CHOOSE_SPORT,
     FILE_UPLOAD_ERROR,
     FILE_UPLOAD_PROGRESS,
     FILE_UPLOAD_START,
-    FILE_UPLOAD_SUCCESS
+    FILE_UPLOAD_SUCCESS,
+    CHOOSE_EVENTLIST_DATE,
+    SELECT_FILTER_CITY,
+    SELECT_FILTER_SPORTS,
+    APPLY_FILTER_EVENTS
  } from '../reducers/eventReducer'
 
 export const hideSnackbar = () =>{
@@ -55,6 +59,45 @@ export const createEvent = (event) =>{
         }).catch(() => {
             dispatch({type: CREATE_EVENT_ERROR, payload: false})
         });
+    }
+}
+
+export const selectFilterCity = (city) => {
+    return (dispatch) => {
+        dispatch({type: SELECT_FILTER_CITY, payload: city});
+    }
+}
+
+export const selectFilterSports = (sports) => {
+    return (dispatch) => {
+        dispatch({type: SELECT_FILTER_SPORTS, payload: sports});
+    }
+}
+
+export const applyFilterEvents = () =>{
+    return (dispatch, getState, {getFirestore}) => {
+        const state = getState();
+        const store = getFirestore();
+        var filterCity = state.event.filterCity;
+        var filterSports = state.event.filterSports;
+        var eventsRef = store.collection('events');
+        var query = null;
+        if(filterCity){
+            query = eventsRef.where('location.city', '==', filterCity.value)
+        }
+        if(filterSports){
+            query = query == null ? eventsRef.where('categorySport', '==', store.doc(`/categorySports/${filterSports.value}`)) : query.where('categorySport', '==', store.doc(`/categorySports/${filterSports.value}`))
+        }
+            query && query.get()
+            .then(snapshot => {
+                var filterEvents = [];
+                snapshot.forEach(doc => {
+                    filterEvents.push({...doc.data(), id: doc.id});
+                })
+                dispatch({type: APPLY_FILTER_EVENTS, payload: filterEvents, isFilterApply: true});
+                return;
+            })
+        dispatch({type: APPLY_FILTER_EVENTS, payload: [], isFilterApply: false});
     }
 }
 
