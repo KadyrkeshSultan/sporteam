@@ -22,8 +22,44 @@ import {
     FILE_UPLOAD_ERROR,
     FILE_UPLOAD_PROGRESS,
     FILE_UPLOAD_START,
-    FILE_UPLOAD_SUCCESS
+    FILE_UPLOAD_SUCCESS,
+    SELECT_FILTER_CITY,
+    SELECT_FILTER_SPORTS,
+    APPLY_FILTER_EVENTS
 } from '../reducers/areaReducer'
+
+export const selectFilterCity = (city) => {
+    return (dispatch) => {
+        dispatch({type: SELECT_FILTER_CITY, payload: city});
+    }
+}
+
+export const applyFilterAreas = () =>{
+    return (dispatch, getState, {getFirestore}) => {
+        const state = getState();
+        const store = getFirestore();
+        var filterCity = state.area.filterCity;
+        //var filterSports = state.event.filterSports;
+        var eventsRef = store.collection('sportgrounds');
+        var query = null;
+        if(filterCity){
+            query = eventsRef.where('location.city', '==', filterCity.value)
+        }
+        // if(filterSports){
+        //     query = query == null ? eventsRef.where('categorySport', '==', store.doc(`/categorySports/${filterSports.value}`)) : query.where('categorySport', '==', store.doc(`/categorySports/${filterSports.value}`))
+        // }
+            query && query.get()
+            .then(snapshot => {
+                var filterAreas = [];
+                snapshot.forEach(doc => {
+                    filterAreas.push({...doc.data(), id: doc.id});
+                })
+                dispatch({type: APPLY_FILTER_EVENTS, payload: filterAreas, isFilterApply: true});
+                return;
+            })
+        dispatch({type: APPLY_FILTER_EVENTS, payload: [], isFilterApply: false});
+    }
+}
 
 export const fileUploadStart = () => {
     return (dispatch) => {
@@ -40,7 +76,7 @@ export const fileUploadError = (error) => {
 export const fileUploadSuccess = (filename) => {
     return (dispatch, getState, { getFirebase }) => {
         var files = getState().area.areaFiles;
-        const fb2 = getFirebase()
+        getFirebase()
             .storage()
             .ref('files')
             .child(filename)
@@ -91,7 +127,7 @@ export const uploadError = (error) => {
 export const uploadSuccess = (filename) => {
     return (dispatch, getState, { getFirebase }) => {
         var images = getState().area.areaImages;
-        const fb2 = getFirebase()
+        getFirebase()
             .storage()
             .ref('images')
             .child(filename)
@@ -199,7 +235,7 @@ export const createArea = () => {
             areaFiles,
         } = getState().area;
 
-        if (areaName == '' || areaPrice == '' || areaContacts == '' || areaWorktime == '' || location.address == '')
+        if (areaName === '' || areaPrice === '' || areaContacts === '' || areaWorktime === '' || location.address === '')
         {
             dispatch({type: CREATE_AREA_VALIDATE_FAIL, payload: 'Заполните все поля!'});
             return;
