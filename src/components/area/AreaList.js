@@ -85,7 +85,6 @@ class AreaList extends React.Component {
     const resultAreas = !isFilterApply ? areas : filterAreas;
     const length = resultAreas != null ? resultAreas : 0;
 
-    if (!auth.uid) return <Redirect to='/login' />
     return (
       <React.Fragment>
         <main>
