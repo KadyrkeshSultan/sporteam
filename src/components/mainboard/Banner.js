@@ -20,7 +20,7 @@ const insideStyles = {
 
 
 };
-const image1 = "./img/back.jpg";
+const image1 = "./img/backo.jpg";
 
 class Banner extends React.Component {
   render() {
