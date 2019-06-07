@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import { YMaps, Map, GeoObject, Clusterer, Placemark, ObjectManager } from 'react-yandex-maps';
+import { YMaps, Map, ObjectManager } from 'react-yandex-maps';
 
 function TabContainer(props) {
     return (
@@ -36,13 +36,13 @@ class MapPlaces extends React.Component {
     };
 
     render() {
-        const { classes, points, areas, events } = this.props;
+        const { areas, events } = this.props;
         const { value } = this.state;
         const defaultLocation = {
             center: [51.132435, 71.404126],
             zoom: 12
         }
-        const pointsAreas = areas && areas.filter(area => area.location.latitude != '').map(area => ({
+        const pointsAreas = areas && areas.filter(area => area.location.latitude !== '').map(area => ({
             type: 'Feature',
             id: area.id,
             geometry: {
@@ -54,7 +54,7 @@ class MapPlaces extends React.Component {
                 ballonContent: `<strong>${area.name}</strong><br/>${area.location.address}`
             }
         }));
-        const pointsEvents = events && events.filter(event => event.location.latitude != '').map(event => ({
+        const pointsEvents = events && events.filter(event => event.location.latitude !== '').map(event => ({
             type: 'Feature',
             id: event.id,
             geometry: {

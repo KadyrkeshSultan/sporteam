@@ -97,7 +97,7 @@ class ErrorSnackbar extends React.Component {
 
     render() {
         const { msg } = this.props;
-        const open = (msg != '') || (msg != null);
+        const open = (msg !== '') || (msg !== null);
         return (
             <div>
                 <Snackbar

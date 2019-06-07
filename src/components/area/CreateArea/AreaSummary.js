@@ -53,8 +53,8 @@ class AreaSummary extends React.Component {
 
     render() {
         const { classes, area, sportTypes, areaTypes, validateMsg } = this.props;
-        const sports = sportTypes && sportTypes.filter((sportType) => area.areaSportTypes.find((item) => item.id == sportType.id) != undefined);
-        const areaType = areaTypes && areaTypes.find((item) => item.id == area.areaTypeId);
+        const sports = sportTypes && sportTypes.filter((sportType) => area.areaSportTypes.find((item) => item.id === sportType.id) !== undefined);
+        const areaType = areaTypes && areaTypes.find((item) => item.id === area.areaTypeId);
 
         return (
             <div>
@@ -145,7 +145,7 @@ class AreaSummary extends React.Component {
                     <ImageUpload />
                 </Grid>
                 <Grid container spacing={8} alignItems="flex-end">
-                    { validateMsg != '' ? <ErrorSnackbar msg={validateMsg} /> : ''}
+                    { validateMsg !== '' ? <ErrorSnackbar msg={validateMsg} /> : ''}
                 </Grid>
             </div>
         );

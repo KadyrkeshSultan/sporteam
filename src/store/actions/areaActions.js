@@ -24,7 +24,6 @@ import {
     FILE_UPLOAD_START,
     FILE_UPLOAD_SUCCESS,
     SELECT_FILTER_CITY,
-    SELECT_FILTER_SPORTS,
     APPLY_FILTER_EVENTS
 } from '../reducers/areaReducer'
 
@@ -93,7 +92,7 @@ export const fileUploadSuccess = (filename) => {
 }
 
 export const fileDelete = (filename) => {
-    return (dispatch, getState, { getFirebase }) => {
+    return (dispatch, getState) => {
         var files = getState().area.areaFiles;
         files = files.filter((item) => item.filename !== filename);
         dispatch({ type: FILE_DELETE, payload: files });
@@ -144,7 +143,7 @@ export const uploadSuccess = (filename) => {
 }
 
 export const imageDelete = (filename) => {
-    return (dispatch, getState, { getFirebase }) => {
+    return (dispatch, getState) => {
         var images = getState().area.areaImages;
         images = images.filter((item) => item.filename !== filename);
         dispatch({ type: IMG_DELETE, payload: images });
@@ -176,13 +175,13 @@ export const chooseAreaSportTypes = (sportTypes) => {
 }
 
 export const clickNextBtn = () => {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         dispatch({ type: CLICK_NEXT_BTN });
     }
 }
 
 export const clickBackBtn = () => {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         dispatch({ type: CLICK_BACK_BTN });
     }
 }
@@ -235,7 +234,7 @@ export const createArea = () => {
             areaFiles,
         } = getState().area;
 
-        if (areaName === '' || areaPrice === '' || areaContacts === '' || areaWorktime === '' || location.address === '')
+        if (areaName === '' || areaPrice === '' || areaContacts === '' || areaWorktime === '')//TODO: || location.address === '')
         {
             dispatch({type: CREATE_AREA_VALIDATE_FAIL, payload: 'Заполните все поля!'});
             return;

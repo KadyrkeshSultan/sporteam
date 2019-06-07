@@ -131,7 +131,7 @@ class FileUpload extends Component {
                 </Grid>
 
                 {
-                    error != '' ? <ErrorSnackbar msg={"При загрузке произошла ошибка, повторите позже"} /> : ""
+                    error !== '' ? <ErrorSnackbar msg={"При загрузке произошла ошибка, повторите позже"} /> : ""
                 }
             </React.Fragment>
         )

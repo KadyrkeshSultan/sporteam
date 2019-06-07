@@ -14,7 +14,6 @@ import { CHOOSE_SPORT,
     FILE_UPLOAD_PROGRESS,
     FILE_UPLOAD_START,
     FILE_UPLOAD_SUCCESS,
-    CHOOSE_EVENTLIST_DATE,
     SELECT_FILTER_CITY,
     SELECT_FILTER_SPORTS,
     APPLY_FILTER_EVENTS
@@ -27,7 +26,7 @@ export const hideSnackbar = () =>{
 }
 
 export const chooseSport = (categorySportId) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) =>{
+    return (dispatch, getState) =>{
         dispatch({type: CHOOSE_SPORT, payload: categorySportId});
     }
 }
@@ -37,7 +36,7 @@ export const createEvent = (event) =>{
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const userId = getState().firebase.auth.uid;
-        if (event.name == '' || event.datetime == null || event.location == null || event.categorySportId == ''){
+        if (event.name === '' || event.datetime == null || event.location == null || event.categorySportId === ''){
             dispatch({type: CREATE_EVENT_VALIDATE_FAIL, payload: 'Заполните все поля'});
             return;
         }
@@ -126,13 +125,13 @@ export const eventDescChange = (eventDesc) =>{
 }
 
 export const clickNextBtn = () =>{
-    return (dispatch, getState) =>{
+    return (dispatch) =>{
         dispatch({type: CLICK_NEXT_BTN});
     }
 }
 
 export const clickBackBtn = () =>{
-    return (dispatch, getState) =>{
+    return (dispatch) =>{
         dispatch({type: CLICK_BACK_BTN});
     }
 }
@@ -152,7 +151,7 @@ export const fileUploadError = (error) => {
 export const fileUploadSuccess = (filename) => {
     return (dispatch, getState, { getFirebase }) => {
         var files = getState().event.eventFiles;
-        const fb2 = getFirebase()
+        getFirebase()
             .storage()
             .ref('files')
             .child(filename)
@@ -169,7 +168,7 @@ export const fileUploadSuccess = (filename) => {
 }
 
 export const fileDelete = (filename) => {
-    return (dispatch, getState, { getFirebase }) => {
+    return (dispatch, getState) => {
         var files = getState().event.eventFiles;
         files = files.filter((item) => item.filename !== filename);
         dispatch({ type: FILE_DELETE, payload: files });

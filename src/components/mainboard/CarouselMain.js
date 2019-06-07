@@ -39,7 +39,7 @@ class CarouselMain extends Component {
         {
             news && news.map(item =>{
                 return <div key={item.id} id={item.id} onClick={this.handleNewsClick}>
-                    <img src={item.images[0]} className={classes.imageNews} />
+                    <img alt="Carousel" src={item.images[0]} className={classes.imageNews} />
                     <p className='legend' style={{backgroundColor: '#0000', fontSize: 'larger'}}>{item.title}</p>
                 </div>
             })

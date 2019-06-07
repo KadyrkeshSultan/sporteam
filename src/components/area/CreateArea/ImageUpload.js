@@ -103,7 +103,7 @@ class ImageUpload extends Component {
                             </GridListTile>
                             {images && images.map(img => (
                                 <GridListTile key={img.filename}>
-                                    <img src={img.url} />
+                                    <img alt={img.filename} src={img.url} />
                                     <GridListTileBar
                                         //title={tile.title}
                                         actionIcon={
@@ -119,7 +119,7 @@ class ImageUpload extends Component {
                 </Grid>
 
                 {
-                    error != '' ? <ErrorSnackbar msg={"При загрузке произошла ошибка, повторите позже"} /> : ""
+                    error !== '' ? <ErrorSnackbar msg={"При загрузке произошла ошибка, повторите позже"} /> : ""
                 }
             </React.Fragment>
         )

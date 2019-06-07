@@ -20,9 +20,8 @@ const styles = theme =>({
 
 class NotFoundPage extends React.Component{
     render(){
-        const { classes, events, areas } = this.props;
         return <React.Fragment>
-            <img src="https://factorypattern.co.uk/assets/uploads/2015/07/golf-porcelainedotcom.jpg" width={'100%'}/>
+            <img alt="Not Found" src="https://factorypattern.co.uk/assets/uploads/2015/07/golf-porcelainedotcom.jpg" width={'100%'}/>
         </React.Fragment>
     }
 }

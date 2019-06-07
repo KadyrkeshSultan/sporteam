@@ -76,7 +76,7 @@ function Mockup(props) {
         {/* End hero unit */}
         <Grid container alignItems="center" justify='center'>
             {
-                <img src='./img/mockup.png' height='551'/>
+                <img src='./img/mockup.png' alt="Android App" height='551'/>
             }
         </Grid>
             

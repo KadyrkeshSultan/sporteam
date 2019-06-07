@@ -22,7 +22,7 @@ const styles = theme => ({
 
 class Settings extends React.Component {
     render() {
-        const { classes, events, areas, auth } = this.props;
+        const { classes } = this.props;
 
         return <React.Fragment>
             <CssBaseline />

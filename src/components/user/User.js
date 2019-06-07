@@ -1,14 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Grid, Avatar } from '@material-ui/core';
-import moment from 'moment';
 import 'moment/locale/ru';
-import YandexShare from '../layout/YandexShare';
 import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
@@ -70,9 +65,7 @@ const styles = theme => ({
 class User extends React.Component {
     render() {
 
-        const { classes, event, categorySports } = this.props;
-        const templatePic = "https://sputniknews.kz/images/552/34/5523465.jpg";
-        const categorySport = event && (categorySports && categorySports.find(item => item.id === event.categorySport.id))
+        const { classes } = this.props;
 
         return <React.Fragment> 
             <div className={classNames(classes.layout, classes.cardGrid)}><br/>

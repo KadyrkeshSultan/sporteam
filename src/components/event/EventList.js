@@ -83,7 +83,7 @@ class EventList extends React.Component {
   };
 
   render() {
-    const { classes, events, auth, filterEvents, isFilterApply } = this.props;
+    const { classes, events, filterEvents, isFilterApply } = this.props;
     const resultEvents = !isFilterApply ? events : filterEvents;
     const length = resultEvents != null ? resultEvents : 0;
 

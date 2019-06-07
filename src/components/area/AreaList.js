@@ -14,7 +14,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AreaDialog from './AreaDialog';
 import FilterList from '@material-ui/icons/FilterList';
-import { Redirect } from 'react-router-dom'
 import { applyFilterAreas } from '../../store/actions/areaActions';
 
 const styles = theme => ({
@@ -81,7 +80,7 @@ class AreaList extends React.Component {
     this.props.applyFilterAreas();
   };
   render() {
-    const { classes, areas, auth, filterAreas, isFilterApply } = this.props;
+    const { classes, areas, filterAreas, isFilterApply } = this.props;
     const resultAreas = !isFilterApply ? areas : filterAreas;
     const length = resultAreas != null ? resultAreas : 0;
 
