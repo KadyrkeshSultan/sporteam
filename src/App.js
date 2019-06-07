@@ -1,54 +1,55 @@
 import React, { Component } from 'react';
 import { Switch, Route, Router } from 'react-router-dom'
-import SignIn from './components/auth/SignIn'
-import SignUp from './components/auth/SignUp'
-import ButtonAppBar from './components/layout/ButtonAppBar'
-import EventList from './components/event/EventList'
-import CreateEventForm from './components/event/CreateEvent/CreateEventForm'
-import Footer from './components/layout/Footer';
-import MainBoard from './components/mainboard/MainBoard';
-import EventBoard from './components/event/EventBoard';
-import AreaBoard from './components/area/AreaBoard';
-import CreateAreaForm from './components/area/CreateArea/CreateAreaForm';
+import asyncComponent from './components/AsyncComponent';
 import history from './components/layout/history';
-import NotFoundPage from './components/layout/NotFoundPage';
-import AreaList from './components/area/AreaList';
-import ScrollToTop from './components/layout/ScrollToTop';
-import NewsBoard from './components/news/NewsBoard'
-import NewsList from './components/news/NewsList'
-import User from './components/user/User'
-import Feedback from './components/about/Feedback';
-import About from './components/about/About'
-import Settings from './components/about/Settings'
+const AsyncSignIn = asyncComponent(() => import('./components/auth/SignIn'));
+const AsyncSignUp = asyncComponent(() => import('./components/auth/SignUp'));
+const AsyncButtonAppBar = asyncComponent(() => import('./components/layout/ButtonAppBar'));
+const AsyncEventList = asyncComponent(() => import('./components/event/EventList'));
+const AsyncCreateEventForm = asyncComponent(() => import('./components/event/CreateEvent/CreateEventForm'));
+const AsyncFooter = asyncComponent(() => import('./components/layout/Footer'));
+const AsyncMainBoard = asyncComponent(() => import('./components/mainboard/MainBoard'));
+const AsyncEventBoard = asyncComponent(() => import('./components/event/EventBoard'));
+const AsyncAreaBoard = asyncComponent(() => import('./components/area/AreaBoard'));
+const AsyncCreateAreaForm = asyncComponent(() => import('./components/area/CreateArea/CreateAreaForm'));
+const AsyncNotFoundPage = asyncComponent(() => import('./components/layout/NotFoundPage'));
+const AsyncAreaList = asyncComponent(() => import('./components/area/AreaList'));
+const AsyncScrollToTop = asyncComponent(() => import('./components/layout/ScrollToTop'));
+const AsyncNewsBoard = asyncComponent(() => import('./components/news/NewsBoard'));
+const AsyncNewsList = asyncComponent(() => import('./components/news/NewsList'));
+const AsyncUser = asyncComponent(() => import('./components/user/User'));
+const AsyncFeedback = asyncComponent(() => import('./components/about/Feedback'));
+const AsyncAbout = asyncComponent(() => import('./components/about/About'));
+const AsyncSettings = asyncComponent(() => import('./components/about/Settings'));
 
 class App extends Component {
   render() {
     return (
       <Router history={history}>
-      <ScrollToTop>
+      <AsyncScrollToTop>
         <div className="App">
-          <ButtonAppBar />
+          <AsyncButtonAppBar />
           <Switch>
-            <Route exact path='/' component={MainBoard} />
-            <Route path='/login' component={SignIn} />
-            <Route path='/signup' component={SignUp} />
-            <Route exact path='/events' component={EventList} />
-            <Route path='/events/create' component={CreateEventForm} />
-            <Route path='/events/:id' component={EventBoard} />
-            <Route exact path='/areas' component={AreaList} />
-            <Route path='/areas/create' component={CreateAreaForm} />
-            <Route path='/areas/:id' component={AreaBoard} />
-            <Route path='/404' component={NotFoundPage}/>
-            <Route path='/news/:id' component={NewsBoard}/>
-            <Route exact path='/news' component={NewsList}/> 
-            <Route path='/user' component={User}/>
-            <Route path="/feedback" component={Feedback} />
-            <Route path='/about' component={About}/>
-            <Route path='/settings' component={Settings}/>
+            <Route exact path='/' component={AsyncMainBoard} />
+            <Route path='/login' component={AsyncSignIn} />
+            <Route path='/signup' component={AsyncSignUp} />
+            <Route exact path='/events' component={AsyncEventList} />
+            <Route path='/events/create' component={AsyncCreateEventForm} />
+            <Route path='/events/:id' component={AsyncEventBoard} />
+            <Route exact path='/areas' component={AsyncAreaList} />
+            <Route path='/areas/create' component={AsyncCreateAreaForm} />
+            <Route path='/areas/:id' component={AsyncAreaBoard} />
+            <Route path='/404' component={AsyncNotFoundPage}/>
+            <Route path='/news/:id' component={AsyncNewsBoard}/>
+            <Route exact path='/news' component={AsyncNewsList}/> 
+            <Route path='/user' component={AsyncUser}/>
+            <Route path="/feedback" component={AsyncFeedback} />
+            <Route path='/about' component={AsyncAbout}/>
+            <Route path='/settings' component={AsyncSettings}/>
           </Switch>
-          <Footer />
+          <AsyncFooter />
         </div>
-        </ScrollToTop>
+        </AsyncScrollToTop>
       </Router>
     );
   }
